@@ -25,7 +25,26 @@ namespace Sessia2
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BuildingTypes> BuildingTypes { get; set; }
+        public virtual DbSet<ConnectedServices> ConnectedServices { get; set; }
+        public virtual DbSet<Contracts> Contracts { get; set; }
+        public virtual DbSet<CRM> CRM { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<EquipmentInstallations> EquipmentInstallations { get; set; }
+        public virtual DbSet<Equipments> Equipments { get; set; }
+        public virtual DbSet<Events> Events { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<PassportDate> PassportDate { get; set; }
+        public virtual DbSet<ProblemTypes> ProblemTypes { get; set; }
+        public virtual DbSet<Raions> Raions { get; set; }
+        public virtual DbSet<ReasonForTerminations> ReasonForTerminations { get; set; }
+        public virtual DbSet<ResidentialAddress> ResidentialAddress { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Services> Services { get; set; }
+        public virtual DbSet<ServiceStatus> ServiceStatus { get; set; }
+        public virtual DbSet<ServiceTypes> ServiceTypes { get; set; }
+        public virtual DbSet<Subscribers> Subscribers { get; set; }
+        public virtual DbSet<TypeContracts> TypeContracts { get; set; }
+        public virtual DbSet<TypeOfServices> TypeOfServices { get; set; }
     }
 }

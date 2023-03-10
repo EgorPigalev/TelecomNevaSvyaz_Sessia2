@@ -4,18 +4,150 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CRM18Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CRM18Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BuildingTypes">
+          <Key>
+            <PropertyRef Name="BuildingTypeID" />
+          </Key>
+          <Property Name="BuildingTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConnectedServices">
+          <Key>
+            <PropertyRef Name="ConnectedServiceID" />
+          </Key>
+          <Property Name="ConnectedServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscribersID" Type="int" Nullable="false" />
+          <Property Name="ServicesID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="SubscribersID" />
+          </Key>
+          <Property Name="SubscribersID" Type="int" Nullable="false" />
+          <Property Name="ContractNumber" Type="int" Nullable="false" />
+          <Property Name="DateOfCinclusion" Type="date" Nullable="false" />
+          <Property Name="PersonalAccount" Type="int" Nullable="false" />
+          <Property Name="TypeContractID" Type="int" Nullable="false" />
+          <Property Name="ReasonForTerminationID" Type="int" />
+          <Property Name="TermibationDate" Type="date" />
+        </EntityType>
+        <EntityType Name="CRM">
+          <Key>
+            <PropertyRef Name="CRMID" />
+          </Key>
+          <Property Name="CRMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberCRM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCreation" Type="date" Nullable="false" />
+          <Property Name="SubscriberID" Type="int" />
+          <Property Name="ServicesID" Type="int" Nullable="false" />
+          <Property Name="TypeOfServiceID" Type="int" Nullable="false" />
+          <Property Name="ServiceTypeID" Type="int" Nullable="false" />
+          <Property Name="ServiceStatusID" Type="int" Nullable="false" />
+          <Property Name="ProblemTypeID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClosingDate" Type="date" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
-            <PropertyRef Name="EmployeesID" />
+            <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="EmployeesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Nomer" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentInstallations">
+          <Key>
+            <PropertyRef Name="InstallationEquipmentID" />
+          </Key>
+          <Property Name="InstallationEquipmentID" Type="int" Nullable="false" />
+          <Property Name="InstallationDate" Type="date" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EquipmentID" Type="int" Nullable="false" />
+          <Property Name="InstallitionAdressID" Type="int" Nullable="false" />
+          <Property Name="SubscriberID" Type="int" Nullable="false" />
+          <Property Name="ConnectionPoint" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GeographicCoordinates" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Rental" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="EquiomentID" />
+          </Key>
+          <Property Name="EquiomentID" Type="int" Nullable="false" />
+          <Property Name="EquiomentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeEquipmentID" Type="int" />
+          <Property Name="InvertaryNumberOS" Type="nvarchar" MaxLength="50" />
+          <Property Name="MACAdress" Type="nvarchar" MaxLength="50" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventDate" Type="date" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PassportDate">
+          <Key>
+            <PropertyRef Name="PassportID" />
+          </Key>
+          <Property Name="PassportID" Type="int" Nullable="false" />
+          <Property Name="Seria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nomer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IssuedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfIssue" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProblemTypes">
+          <Key>
+            <PropertyRef Name="ProblemTypeID" />
+          </Key>
+          <Property Name="ProblemTypeID" Type="int" Nullable="false" />
+          <Property Name="ProblemType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Raions">
+          <Key>
+            <PropertyRef Name="RaionID" />
+          </Key>
+          <Property Name="RaionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Square" Type="float" Nullable="false" />
+          <Property Name="Population" Type="int" Nullable="false" />
+          <Property Name="CountMetroStations" Type="int" Nullable="false" />
+          <Property Name="BuildingTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReasonForTerminations">
+          <Key>
+            <PropertyRef Name="ReasonForTerminationID" />
+          </Key>
+          <Property Name="ReasonForTerminationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReasonForTermination" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResidentialAddress">
+          <Key>
+            <PropertyRef Name="ResidentialAddressID" />
+          </Key>
+          <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PrefixCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RaionID" Type="int" Nullable="false" />
+          <Property Name="Prefix" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="House" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -24,6 +156,195 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServicesID" />
+          </Key>
+          <Property Name="ServicesID" Type="int" Nullable="false" />
+          <Property Name="Services" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceStatus">
+          <Key>
+            <PropertyRef Name="ServiceStatusID" />
+          </Key>
+          <Property Name="ServiceStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceTypes">
+          <Key>
+            <PropertyRef Name="ServiceTypeID" />
+          </Key>
+          <Property Name="ServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscribers">
+          <Key>
+            <PropertyRef Name="SubscriberID" />
+          </Key>
+          <Property Name="SubscriberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriberNomer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Place0fResidence" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Seria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nomer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IssuedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfIssue" Type="date" Nullable="false" />
+          <Property Name="ServiceContractID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeContracts">
+          <Key>
+            <PropertyRef Name="TypeContractID" />
+          </Key>
+          <Property Name="TypeContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeContract" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfServices">
+          <Key>
+            <PropertyRef Name="TypeOfServiceID" />
+          </Key>
+          <Property Name="TypeOfServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeOfService" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ConnectedServices_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="ConnectedServices" Type="Self.ConnectedServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="SubscribersID" />
+            </Principal>
+            <Dependent Role="ConnectedServices">
+              <PropertyRef Name="SubscribersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConnectedServices_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="ConnectedServices" Type="Self.ConnectedServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServicesID" />
+            </Principal>
+            <Dependent Role="ConnectedServices">
+              <PropertyRef Name="ServicesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_ReasonForTerminations">
+          <End Role="ReasonForTerminations" Type="Self.ReasonForTerminations" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReasonForTerminations">
+              <PropertyRef Name="ReasonForTerminationID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ReasonForTerminationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Subscribers">
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="SubscriberID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="SubscribersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_TypeContracts">
+          <End Role="TypeContracts" Type="Self.TypeContracts" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeContracts">
+              <PropertyRef Name="TypeContractID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="TypeContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_ProblemTypes">
+          <End Role="ProblemTypes" Type="Self.ProblemTypes" Multiplicity="1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProblemTypes">
+              <PropertyRef Name="ProblemTypeID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ProblemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServicesID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ServicesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_ServiceStatus">
+          <End Role="ServiceStatus" Type="Self.ServiceStatus" Multiplicity="1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceStatus">
+              <PropertyRef Name="ServiceStatusID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ServiceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_ServiceTypes">
+          <End Role="ServiceTypes" Type="Self.ServiceTypes" Multiplicity="1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTypes">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ServiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_Subscribers">
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="0..1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="SubscriberID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_TypeOfServices">
+          <End Role="TypeOfServices" Type="Self.TypeOfServices" Multiplicity="1" />
+          <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfServices">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employees_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
@@ -36,43 +357,707 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EquipmentInstallations_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="EquipmentInstallations" Type="Self.EquipmentInstallations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EquipmentInstallations">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentInstallations_Equipments">
+          <End Role="Equipments" Type="Self.Equipments" Multiplicity="1" />
+          <End Role="EquipmentInstallations" Type="Self.EquipmentInstallations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipments">
+              <PropertyRef Name="EquiomentID" />
+            </Principal>
+            <Dependent Role="EquipmentInstallations">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentInstallations_Subscribers">
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="1" />
+          <End Role="EquipmentInstallations" Type="Self.EquipmentInstallations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="SubscriberID" />
+            </Principal>
+            <Dependent Role="EquipmentInstallations">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Raions_BuildingTypes">
+          <End Role="BuildingTypes" Type="Self.BuildingTypes" Multiplicity="1" />
+          <End Role="Raions" Type="Self.Raions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingTypes">
+              <PropertyRef Name="BuildingTypeID" />
+            </Principal>
+            <Dependent Role="Raions">
+              <PropertyRef Name="BuildingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentialAddress_Raions">
+          <End Role="Raions" Type="Self.Raions" Multiplicity="1" />
+          <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raions">
+              <PropertyRef Name="RaionID" />
+            </Principal>
+            <Dependent Role="ResidentialAddress">
+              <PropertyRef Name="RaionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_ResidentialAddress">
+          <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentialAddress">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище CRM18ModelContainer">
+          <EntitySet Name="BuildingTypes" EntityType="Self.BuildingTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConnectedServices" EntityType="Self.ConnectedServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CRM" EntityType="Self.CRM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentInstallations" EntityType="Self.EquipmentInstallations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipments" EntityType="Self.Equipments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PassportDate" EntityType="Self.PassportDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProblemTypes" EntityType="Self.ProblemTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Raions" EntityType="Self.Raions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReasonForTerminations" EntityType="Self.ReasonForTerminations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentialAddress" EntityType="Self.ResidentialAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceStatus" EntityType="Self.ServiceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscribers" EntityType="Self.Subscribers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeContracts" EntityType="Self.TypeContracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfServices" EntityType="Self.TypeOfServices" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ConnectedServices_Contracts" Association="Self.FK_ConnectedServices_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="ConnectedServices" EntitySet="ConnectedServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConnectedServices_Services" Association="Self.FK_ConnectedServices_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ConnectedServices" EntitySet="ConnectedServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_ReasonForTerminations" Association="Self.FK_Contracts_ReasonForTerminations">
+            <End Role="ReasonForTerminations" EntitySet="ReasonForTerminations" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Subscribers" Association="Self.FK_Contracts_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_TypeContracts" Association="Self.FK_Contracts_TypeContracts">
+            <End Role="TypeContracts" EntitySet="TypeContracts" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_ProblemTypes" Association="Self.FK_CRM_ProblemTypes">
+            <End Role="ProblemTypes" EntitySet="ProblemTypes" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_Services" Association="Self.FK_CRM_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_ServiceStatus" Association="Self.FK_CRM_ServiceStatus">
+            <End Role="ServiceStatus" EntitySet="ServiceStatus" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_ServiceTypes" Association="Self.FK_CRM_ServiceTypes">
+            <End Role="ServiceTypes" EntitySet="ServiceTypes" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_Subscribers" Association="Self.FK_CRM_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_TypeOfServices" Association="Self.FK_CRM_TypeOfServices">
+            <End Role="TypeOfServices" EntitySet="TypeOfServices" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employees_Roles" Association="Self.FK_Employees_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_EquipmentInstallations_Employees" Association="Self.FK_EquipmentInstallations_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentInstallations_Equipments" Association="Self.FK_EquipmentInstallations_Equipments">
+            <End Role="Equipments" EntitySet="Equipments" />
+            <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentInstallations_Subscribers" Association="Self.FK_EquipmentInstallations_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Roles" Association="Self.FK_Events_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Raions_BuildingTypes" Association="Self.FK_Raions_BuildingTypes">
+            <End Role="BuildingTypes" EntitySet="BuildingTypes" />
+            <End Role="Raions" EntitySet="Raions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentialAddress_Raions" Association="Self.FK_ResidentialAddress_Raions">
+            <End Role="Raions" EntitySet="Raions" />
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_Gender" Association="Self.FK_Subscribers_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_ResidentialAddress" Association="Self.FK_Subscribers_ResidentialAddress">
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CRM18Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BaseDate" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BuildingTypes" EntityType="CRM18Model.BuildingTypes" />
+          <EntitySet Name="ConnectedServices" EntityType="CRM18Model.ConnectedServices" />
+          <EntitySet Name="Contracts" EntityType="CRM18Model.Contracts" />
+          <EntitySet Name="CRM" EntityType="CRM18Model.CRM" />
+          <EntitySet Name="Employees" EntityType="CRM18Model.Employees" />
+          <EntitySet Name="EquipmentInstallations" EntityType="CRM18Model.EquipmentInstallations" />
+          <EntitySet Name="Equipments" EntityType="CRM18Model.Equipments" />
+          <EntitySet Name="Events" EntityType="CRM18Model.Events" />
+          <EntitySet Name="Gender" EntityType="CRM18Model.Gender" />
+          <EntitySet Name="PassportDate" EntityType="CRM18Model.PassportDate" />
+          <EntitySet Name="ProblemTypes" EntityType="CRM18Model.ProblemTypes" />
+          <EntitySet Name="Raions" EntityType="CRM18Model.Raions" />
+          <EntitySet Name="ReasonForTerminations" EntityType="CRM18Model.ReasonForTerminations" />
+          <EntitySet Name="ResidentialAddress" EntityType="CRM18Model.ResidentialAddress" />
+          <EntitySet Name="Roles" EntityType="CRM18Model.Roles" />
+          <EntitySet Name="Services" EntityType="CRM18Model.Services" />
+          <EntitySet Name="ServiceStatus" EntityType="CRM18Model.ServiceStatus" />
+          <EntitySet Name="ServiceTypes" EntityType="CRM18Model.ServiceTypes" />
+          <EntitySet Name="Subscribers" EntityType="CRM18Model.Subscribers" />
+          <EntitySet Name="TypeContracts" EntityType="CRM18Model.TypeContracts" />
+          <EntitySet Name="TypeOfServices" EntityType="CRM18Model.TypeOfServices" />
+          <AssociationSet Name="FK_Raions_BuildingTypes" Association="CRM18Model.FK_Raions_BuildingTypes">
+            <End Role="BuildingTypes" EntitySet="BuildingTypes" />
+            <End Role="Raions" EntitySet="Raions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConnectedServices_Contracts" Association="CRM18Model.FK_ConnectedServices_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="ConnectedServices" EntitySet="ConnectedServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConnectedServices_Services" Association="CRM18Model.FK_ConnectedServices_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="ConnectedServices" EntitySet="ConnectedServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_ReasonForTerminations" Association="CRM18Model.FK_Contracts_ReasonForTerminations">
+            <End Role="ReasonForTerminations" EntitySet="ReasonForTerminations" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Subscribers" Association="CRM18Model.FK_Contracts_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_TypeContracts" Association="CRM18Model.FK_Contracts_TypeContracts">
+            <End Role="TypeContracts" EntitySet="TypeContracts" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_ProblemTypes" Association="CRM18Model.FK_CRM_ProblemTypes">
+            <End Role="ProblemTypes" EntitySet="ProblemTypes" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_Services" Association="CRM18Model.FK_CRM_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_ServiceStatus" Association="CRM18Model.FK_CRM_ServiceStatus">
+            <End Role="ServiceStatus" EntitySet="ServiceStatus" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_ServiceTypes" Association="CRM18Model.FK_CRM_ServiceTypes">
+            <End Role="ServiceTypes" EntitySet="ServiceTypes" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_Subscribers" Association="CRM18Model.FK_CRM_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_TypeOfServices" Association="CRM18Model.FK_CRM_TypeOfServices">
+            <End Role="TypeOfServices" EntitySet="TypeOfServices" />
+            <End Role="CRM" EntitySet="CRM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Roles" Association="CRM18Model.FK_Employees_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentInstallations_Employees" Association="CRM18Model.FK_EquipmentInstallations_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentInstallations_Equipments" Association="CRM18Model.FK_EquipmentInstallations_Equipments">
+            <End Role="Equipments" EntitySet="Equipments" />
+            <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentInstallations_Subscribers" Association="CRM18Model.FK_EquipmentInstallations_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Roles" Association="CRM18Model.FK_Events_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_Gender" Association="CRM18Model.FK_Subscribers_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentialAddress_Raions" Association="CRM18Model.FK_ResidentialAddress_Raions">
+            <End Role="Raions" EntitySet="Raions" />
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_ResidentialAddress" Association="CRM18Model.FK_Subscribers_ResidentialAddress">
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BuildingTypes">
+          <Key>
+            <PropertyRef Name="BuildingTypeID" />
+          </Key>
+          <Property Name="BuildingTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Raions" Relationship="CRM18Model.FK_Raions_BuildingTypes" FromRole="BuildingTypes" ToRole="Raions" />
+        </EntityType>
+        <EntityType Name="ConnectedServices">
+          <Key>
+            <PropertyRef Name="ConnectedServiceID" />
+          </Key>
+          <Property Name="ConnectedServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscribersID" Type="Int32" Nullable="false" />
+          <Property Name="ServicesID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_ConnectedServices_Contracts" FromRole="ConnectedServices" ToRole="Contracts" />
+          <NavigationProperty Name="Services" Relationship="CRM18Model.FK_ConnectedServices_Services" FromRole="ConnectedServices" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="SubscribersID" />
+          </Key>
+          <Property Name="SubscribersID" Type="Int32" Nullable="false" />
+          <Property Name="ContractNumber" Type="Int32" Nullable="false" />
+          <Property Name="DateOfCinclusion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PersonalAccount" Type="Int32" Nullable="false" />
+          <Property Name="TypeContractID" Type="Int32" Nullable="false" />
+          <Property Name="ReasonForTerminationID" Type="Int32" />
+          <Property Name="TermibationDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ConnectedServices" Relationship="CRM18Model.FK_ConnectedServices_Contracts" FromRole="Contracts" ToRole="ConnectedServices" />
+          <NavigationProperty Name="ReasonForTerminations" Relationship="CRM18Model.FK_Contracts_ReasonForTerminations" FromRole="Contracts" ToRole="ReasonForTerminations" />
+          <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Contracts_Subscribers" FromRole="Contracts" ToRole="Subscribers" />
+          <NavigationProperty Name="TypeContracts" Relationship="CRM18Model.FK_Contracts_TypeContracts" FromRole="Contracts" ToRole="TypeContracts" />
+        </EntityType>
+        <EntityType Name="CRM">
+          <Key>
+            <PropertyRef Name="CRMID" />
+          </Key>
+          <Property Name="CRMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberCRM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SubscriberID" Type="Int32" />
+          <Property Name="ServicesID" Type="Int32" Nullable="false" />
+          <Property Name="TypeOfServiceID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ProblemTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClosingDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ProblemTypes" Relationship="CRM18Model.FK_CRM_ProblemTypes" FromRole="CRM" ToRole="ProblemTypes" />
+          <NavigationProperty Name="Services" Relationship="CRM18Model.FK_CRM_Services" FromRole="CRM" ToRole="Services" />
+          <NavigationProperty Name="ServiceStatus" Relationship="CRM18Model.FK_CRM_ServiceStatus" FromRole="CRM" ToRole="ServiceStatus" />
+          <NavigationProperty Name="ServiceTypes" Relationship="CRM18Model.FK_CRM_ServiceTypes" FromRole="CRM" ToRole="ServiceTypes" />
+          <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_CRM_Subscribers" FromRole="CRM" ToRole="Subscribers" />
+          <NavigationProperty Name="TypeOfServices" Relationship="CRM18Model.FK_CRM_TypeOfServices" FromRole="CRM" ToRole="TypeOfServices" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
-            <PropertyRef Name="EmployeesID" />
+            <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="EmployeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="Nomer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Employees_Roles" FromRole="Employees" ToRole="Roles" />
+          <Property Name="Nomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Roles" Relationship="CRM18Model.FK_Employees_Roles" FromRole="Employees" ToRole="Roles" />
+          <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Employees" FromRole="Employees" ToRole="EquipmentInstallations" />
+        </EntityType>
+        <EntityType Name="EquipmentInstallations">
+          <Key>
+            <PropertyRef Name="InstallationEquipmentID" />
+          </Key>
+          <Property Name="InstallationEquipmentID" Type="Int32" Nullable="false" />
+          <Property Name="InstallationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" />
+          <Property Name="InstallitionAdressID" Type="Int32" Nullable="false" />
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionPoint" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GeographicCoordinates" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Rental" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="CRM18Model.FK_EquipmentInstallations_Employees" FromRole="EquipmentInstallations" ToRole="Employees" />
+          <NavigationProperty Name="Equipments" Relationship="CRM18Model.FK_EquipmentInstallations_Equipments" FromRole="EquipmentInstallations" ToRole="Equipments" />
+          <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_EquipmentInstallations_Subscribers" FromRole="EquipmentInstallations" ToRole="Subscribers" />
+        </EntityType>
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="EquiomentID" />
+          </Key>
+          <Property Name="EquiomentID" Type="Int32" Nullable="false" />
+          <Property Name="EquiomentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeEquipmentID" Type="Int32" />
+          <Property Name="InvertaryNumberOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MACAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Equipments" FromRole="Equipments" ToRole="EquipmentInstallations" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="CRM18Model.FK_Events_Roles" FromRole="Events" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_Gender" FromRole="Gender" ToRole="Subscribers" />
+        </EntityType>
+        <EntityType Name="PassportDate">
+          <Key>
+            <PropertyRef Name="PassportID" />
+          </Key>
+          <Property Name="PassportID" Type="Int32" Nullable="false" />
+          <Property Name="Seria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DivisionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="ProblemTypes">
+          <Key>
+            <PropertyRef Name="ProblemTypeID" />
+          </Key>
+          <Property Name="ProblemTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ProblemType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_ProblemTypes" FromRole="ProblemTypes" ToRole="CRM" />
+        </EntityType>
+        <EntityType Name="Raions">
+          <Key>
+            <PropertyRef Name="RaionID" />
+          </Key>
+          <Property Name="RaionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Square" Type="Double" Nullable="false" />
+          <Property Name="Population" Type="Int32" Nullable="false" />
+          <Property Name="CountMetroStations" Type="Int32" Nullable="false" />
+          <Property Name="BuildingTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BuildingTypes" Relationship="CRM18Model.FK_Raions_BuildingTypes" FromRole="Raions" ToRole="BuildingTypes" />
+          <NavigationProperty Name="ResidentialAddress" Relationship="CRM18Model.FK_ResidentialAddress_Raions" FromRole="Raions" ToRole="ResidentialAddress" />
+        </EntityType>
+        <EntityType Name="ReasonForTerminations">
+          <Key>
+            <PropertyRef Name="ReasonForTerminationID" />
+          </Key>
+          <Property Name="ReasonForTerminationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReasonForTermination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_ReasonForTerminations" FromRole="ReasonForTerminations" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="ResidentialAddress">
+          <Key>
+            <PropertyRef Name="ResidentialAddressID" />
+          </Key>
+          <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PrefixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RaionID" Type="Int32" Nullable="false" />
+          <Property Name="Prefix" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="House" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Raions" Relationship="CRM18Model.FK_ResidentialAddress_Raions" FromRole="ResidentialAddress" ToRole="Raions" />
+          <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="ResidentialAddress" ToRole="Subscribers" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Roles" FromRole="Roles" ToRole="Employees" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="CRM18Model.FK_Employees_Roles" FromRole="Roles" ToRole="Employees" />
+          <NavigationProperty Name="Events" Relationship="CRM18Model.FK_Events_Roles" FromRole="Roles" ToRole="Events" />
         </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServicesID" />
+          </Key>
+          <Property Name="ServicesID" Type="Int32" Nullable="false" />
+          <Property Name="Services1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ConnectedServices" Relationship="CRM18Model.FK_ConnectedServices_Services" FromRole="Services" ToRole="ConnectedServices" />
+          <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_Services" FromRole="Services" ToRole="CRM" />
+        </EntityType>
+        <EntityType Name="ServiceStatus">
+          <Key>
+            <PropertyRef Name="ServiceStatusID" />
+          </Key>
+          <Property Name="ServiceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceStatus1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_ServiceStatus" FromRole="ServiceStatus" ToRole="CRM" />
+        </EntityType>
+        <EntityType Name="ServiceTypes">
+          <Key>
+            <PropertyRef Name="ServiceTypeID" />
+          </Key>
+          <Property Name="ServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_ServiceTypes" FromRole="ServiceTypes" ToRole="CRM" />
+        </EntityType>
+        <EntityType Name="Subscribers">
+          <Key>
+            <PropertyRef Name="SubscriberID" />
+          </Key>
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriberNomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Place0fResidence" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Seria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DivisionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ServiceContractID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_Subscribers" FromRole="Subscribers" ToRole="Contracts" />
+          <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_Subscribers" FromRole="Subscribers" ToRole="CRM" />
+          <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Subscribers" FromRole="Subscribers" ToRole="EquipmentInstallations" />
+          <NavigationProperty Name="Gender" Relationship="CRM18Model.FK_Subscribers_Gender" FromRole="Subscribers" ToRole="Gender" />
+          <NavigationProperty Name="ResidentialAddress" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="Subscribers" ToRole="ResidentialAddress" />
+        </EntityType>
+        <EntityType Name="TypeContracts">
+          <Key>
+            <PropertyRef Name="TypeContractID" />
+          </Key>
+          <Property Name="TypeContractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeContract" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_TypeContracts" FromRole="TypeContracts" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="TypeOfServices">
+          <Key>
+            <PropertyRef Name="TypeOfServiceID" />
+          </Key>
+          <Property Name="TypeOfServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOfService" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_TypeOfServices" FromRole="TypeOfServices" ToRole="CRM" />
+        </EntityType>
+        <Association Name="FK_Raions_BuildingTypes">
+          <End Type="CRM18Model.BuildingTypes" Role="BuildingTypes" Multiplicity="1" />
+          <End Type="CRM18Model.Raions" Role="Raions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingTypes">
+              <PropertyRef Name="BuildingTypeID" />
+            </Principal>
+            <Dependent Role="Raions">
+              <PropertyRef Name="BuildingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConnectedServices_Contracts">
+          <End Type="CRM18Model.Contracts" Role="Contracts" Multiplicity="1" />
+          <End Type="CRM18Model.ConnectedServices" Role="ConnectedServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="SubscribersID" />
+            </Principal>
+            <Dependent Role="ConnectedServices">
+              <PropertyRef Name="SubscribersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConnectedServices_Services">
+          <End Type="CRM18Model.Services" Role="Services" Multiplicity="1" />
+          <End Type="CRM18Model.ConnectedServices" Role="ConnectedServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServicesID" />
+            </Principal>
+            <Dependent Role="ConnectedServices">
+              <PropertyRef Name="ServicesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_ReasonForTerminations">
+          <End Type="CRM18Model.ReasonForTerminations" Role="ReasonForTerminations" Multiplicity="0..1" />
+          <End Type="CRM18Model.Contracts" Role="Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReasonForTerminations">
+              <PropertyRef Name="ReasonForTerminationID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ReasonForTerminationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Subscribers">
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="1" />
+          <End Type="CRM18Model.Contracts" Role="Contracts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="SubscriberID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="SubscribersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_TypeContracts">
+          <End Type="CRM18Model.TypeContracts" Role="TypeContracts" Multiplicity="1" />
+          <End Type="CRM18Model.Contracts" Role="Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeContracts">
+              <PropertyRef Name="TypeContractID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="TypeContractID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_ProblemTypes">
+          <End Type="CRM18Model.ProblemTypes" Role="ProblemTypes" Multiplicity="1" />
+          <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProblemTypes">
+              <PropertyRef Name="ProblemTypeID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ProblemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_Services">
+          <End Type="CRM18Model.Services" Role="Services" Multiplicity="1" />
+          <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServicesID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ServicesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_ServiceStatus">
+          <End Type="CRM18Model.ServiceStatus" Role="ServiceStatus" Multiplicity="1" />
+          <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceStatus">
+              <PropertyRef Name="ServiceStatusID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ServiceStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_ServiceTypes">
+          <End Type="CRM18Model.ServiceTypes" Role="ServiceTypes" Multiplicity="1" />
+          <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTypes">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="ServiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_Subscribers">
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="0..1" />
+          <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="SubscriberID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_TypeOfServices">
+          <End Type="CRM18Model.TypeOfServices" Role="TypeOfServices" Multiplicity="1" />
+          <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfServices">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Principal>
+            <Dependent Role="CRM">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employees_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <End Type="CRM18Model.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="CRM18Model.Employees" Role="Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="RoleID" />
@@ -82,38 +1067,322 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BaseDate" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Employees" EntityType="Self.Employees" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" />
-          <AssociationSet Name="FK_Employees_Roles" Association="Self.FK_Employees_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_EquipmentInstallations_Employees">
+          <End Type="CRM18Model.Employees" Role="Employees" Multiplicity="1" />
+          <End Type="CRM18Model.EquipmentInstallations" Role="EquipmentInstallations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EquipmentInstallations">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentInstallations_Equipments">
+          <End Type="CRM18Model.Equipments" Role="Equipments" Multiplicity="1" />
+          <End Type="CRM18Model.EquipmentInstallations" Role="EquipmentInstallations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipments">
+              <PropertyRef Name="EquiomentID" />
+            </Principal>
+            <Dependent Role="EquipmentInstallations">
+              <PropertyRef Name="EquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentInstallations_Subscribers">
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="1" />
+          <End Type="CRM18Model.EquipmentInstallations" Role="EquipmentInstallations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="SubscriberID" />
+            </Principal>
+            <Dependent Role="EquipmentInstallations">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Roles">
+          <End Type="CRM18Model.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="CRM18Model.Events" Role="Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_Gender">
+          <End Type="CRM18Model.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentialAddress_Raions">
+          <End Type="CRM18Model.Raions" Role="Raions" Multiplicity="1" />
+          <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raions">
+              <PropertyRef Name="RaionID" />
+            </Principal>
+            <Dependent Role="ResidentialAddress">
+              <PropertyRef Name="RaionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_ResidentialAddress">
+          <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="1" />
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentialAddress">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище CRM18ModelContainer" CdmEntityContainer="BaseDate">
+          <EntitySetMapping Name="BuildingTypes">
+            <EntityTypeMapping TypeName="CRM18Model.BuildingTypes">
+              <MappingFragment StoreEntitySet="BuildingTypes">
+                <ScalarProperty Name="BuildingType" ColumnName="BuildingType" />
+                <ScalarProperty Name="BuildingTypeID" ColumnName="BuildingTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConnectedServices">
+            <EntityTypeMapping TypeName="CRM18Model.ConnectedServices">
+              <MappingFragment StoreEntitySet="ConnectedServices">
+                <ScalarProperty Name="ServicesID" ColumnName="ServicesID" />
+                <ScalarProperty Name="SubscribersID" ColumnName="SubscribersID" />
+                <ScalarProperty Name="ConnectedServiceID" ColumnName="ConnectedServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="CRM18Model.Contracts">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="TermibationDate" ColumnName="TermibationDate" />
+                <ScalarProperty Name="ReasonForTerminationID" ColumnName="ReasonForTerminationID" />
+                <ScalarProperty Name="TypeContractID" ColumnName="TypeContractID" />
+                <ScalarProperty Name="PersonalAccount" ColumnName="PersonalAccount" />
+                <ScalarProperty Name="DateOfCinclusion" ColumnName="DateOfCinclusion" />
+                <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
+                <ScalarProperty Name="SubscribersID" ColumnName="SubscribersID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRM">
+            <EntityTypeMapping TypeName="CRM18Model.CRM">
+              <MappingFragment StoreEntitySet="CRM">
+                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProblemTypeID" ColumnName="ProblemTypeID" />
+                <ScalarProperty Name="ServiceStatusID" ColumnName="ServiceStatusID" />
+                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+                <ScalarProperty Name="TypeOfServiceID" ColumnName="TypeOfServiceID" />
+                <ScalarProperty Name="ServicesID" ColumnName="ServicesID" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="NumberCRM" ColumnName="NumberCRM" />
+                <ScalarProperty Name="CRMID" ColumnName="CRMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="CRM18Model.Employees">
               <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="EmployeesID" ColumnName="EmployeesID" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="Nomer" ColumnName="Nomer" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Nomer" ColumnName="Nomer" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentInstallations">
+            <EntityTypeMapping TypeName="CRM18Model.EquipmentInstallations">
+              <MappingFragment StoreEntitySet="EquipmentInstallations">
+                <ScalarProperty Name="Rental" ColumnName="Rental" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="GeographicCoordinates" ColumnName="GeographicCoordinates" />
+                <ScalarProperty Name="ConnectionPoint" ColumnName="ConnectionPoint" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="InstallitionAdressID" ColumnName="InstallitionAdressID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="InstallationDate" ColumnName="InstallationDate" />
+                <ScalarProperty Name="InstallationEquipmentID" ColumnName="InstallationEquipmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="CRM18Model.Equipments">
+              <MappingFragment StoreEntitySet="Equipments">
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="MACAdress" ColumnName="MACAdress" />
+                <ScalarProperty Name="InvertaryNumberOS" ColumnName="InvertaryNumberOS" />
+                <ScalarProperty Name="TypeEquipmentID" ColumnName="TypeEquipmentID" />
+                <ScalarProperty Name="EquiomentName" ColumnName="EquiomentName" />
+                <ScalarProperty Name="EquiomentID" ColumnName="EquiomentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="CRM18Model.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="CRM18Model.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Gender1" ColumnName="Gender" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PassportDate">
+            <EntityTypeMapping TypeName="CRM18Model.PassportDate">
+              <MappingFragment StoreEntitySet="PassportDate">
+                <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
+                <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
+                <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
+                <ScalarProperty Name="Nomer" ColumnName="Nomer" />
+                <ScalarProperty Name="Seria" ColumnName="Seria" />
+                <ScalarProperty Name="PassportID" ColumnName="PassportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProblemTypes">
+            <EntityTypeMapping TypeName="CRM18Model.ProblemTypes">
+              <MappingFragment StoreEntitySet="ProblemTypes">
+                <ScalarProperty Name="ProblemType" ColumnName="ProblemType" />
+                <ScalarProperty Name="ProblemTypeID" ColumnName="ProblemTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Raions">
+            <EntityTypeMapping TypeName="CRM18Model.Raions">
+              <MappingFragment StoreEntitySet="Raions">
+                <ScalarProperty Name="BuildingTypeID" ColumnName="BuildingTypeID" />
+                <ScalarProperty Name="CountMetroStations" ColumnName="CountMetroStations" />
+                <ScalarProperty Name="Population" ColumnName="Population" />
+                <ScalarProperty Name="Square" ColumnName="Square" />
+                <ScalarProperty Name="RaionName" ColumnName="RaionName" />
+                <ScalarProperty Name="RaionID" ColumnName="RaionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReasonForTerminations">
+            <EntityTypeMapping TypeName="CRM18Model.ReasonForTerminations">
+              <MappingFragment StoreEntitySet="ReasonForTerminations">
+                <ScalarProperty Name="ReasonForTermination" ColumnName="ReasonForTermination" />
+                <ScalarProperty Name="ReasonForTerminationID" ColumnName="ReasonForTerminationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResidentialAddress">
+            <EntityTypeMapping TypeName="CRM18Model.ResidentialAddress">
+              <MappingFragment StoreEntitySet="ResidentialAddress">
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="RaionID" ColumnName="RaionID" />
+                <ScalarProperty Name="PrefixCode" ColumnName="PrefixCode" />
+                <ScalarProperty Name="ResidentialAddressID" ColumnName="ResidentialAddressID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="CRM18Model.Roles">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="CRM18Model.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Services1" ColumnName="Services" />
+                <ScalarProperty Name="ServicesID" ColumnName="ServicesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceStatus">
+            <EntityTypeMapping TypeName="CRM18Model.ServiceStatus">
+              <MappingFragment StoreEntitySet="ServiceStatus">
+                <ScalarProperty Name="ServiceStatus1" ColumnName="ServiceStatus" />
+                <ScalarProperty Name="ServiceStatusID" ColumnName="ServiceStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceTypes">
+            <EntityTypeMapping TypeName="CRM18Model.ServiceTypes">
+              <MappingFragment StoreEntitySet="ServiceTypes">
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscribers">
+            <EntityTypeMapping TypeName="CRM18Model.Subscribers">
+              <MappingFragment StoreEntitySet="Subscribers">
+                <ScalarProperty Name="ServiceContractID" ColumnName="ServiceContractID" />
+                <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
+                <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
+                <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
+                <ScalarProperty Name="Nomer" ColumnName="Nomer" />
+                <ScalarProperty Name="Seria" ColumnName="Seria" />
+                <ScalarProperty Name="ResidentialAddressID" ColumnName="ResidentialAddressID" />
+                <ScalarProperty Name="Place0fResidence" ColumnName="Place0fResidence" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="SubscriberNomer" ColumnName="SubscriberNomer" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeContracts">
+            <EntityTypeMapping TypeName="CRM18Model.TypeContracts">
+              <MappingFragment StoreEntitySet="TypeContracts">
+                <ScalarProperty Name="TypeContract" ColumnName="TypeContract" />
+                <ScalarProperty Name="TypeContractID" ColumnName="TypeContractID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfServices">
+            <EntityTypeMapping TypeName="CRM18Model.TypeOfServices">
+              <MappingFragment StoreEntitySet="TypeOfServices">
+                <ScalarProperty Name="TypeOfService" ColumnName="TypeOfService" />
+                <ScalarProperty Name="TypeOfServiceID" ColumnName="TypeOfServiceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

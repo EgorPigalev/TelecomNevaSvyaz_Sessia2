@@ -12,21 +12,21 @@ namespace Sessia2
     using System;
     using System.Collections.Generic;
     
-    public partial class Roles
+    public partial class Services
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roles()
+        public Services()
         {
-            this.Employees = new HashSet<Employees>();
-            this.Events = new HashSet<Events>();
+            this.ConnectedServices = new HashSet<ConnectedServices>();
+            this.CRM = new HashSet<CRM>();
         }
     
-        public int RoleID { get; set; }
-        public string Role { get; set; }
+        public int ServicesID { get; set; }
+        public string Services1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees> Employees { get; set; }
+        public virtual ICollection<ConnectedServices> ConnectedServices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Events> Events { get; set; }
+        public virtual ICollection<CRM> CRM { get; set; }
     }
 }

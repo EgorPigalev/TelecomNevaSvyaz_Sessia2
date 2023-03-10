@@ -29,5 +29,56 @@ namespace Sessia2
             cbFIOEmployee.DisplayMemberPath = "FIO";
             cbFIOEmployee.SelectedIndex = 0;
         }
+
+        private void cbFIOEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.EmployeeID == cbFIOEmployee.SelectedIndex + 1);
+            if(employee != null)
+            {
+                lvEvents.ItemsSource = Base.baseDate.Events.Where(x => x.RoleID == employee.RoleID).ToList();
+            }
+        }
+
+        public static DependencyObject GetScrollViewer(DependencyObject o)
+        {
+            if (o is ScrollViewer)
+            { return o; }
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
+            {
+                var child = VisualTreeHelper.GetChild(o, i);
+
+                var result = GetScrollViewer(child);
+                if (result == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
+        private void btnUp_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var scrollViwer = GetScrollViewer(lvEvents) as ScrollViewer;
+
+            if (scrollViwer != null)
+            {
+                scrollViwer.ScrollToVerticalOffset(scrollViwer.VerticalOffset - 1);
+            }
+        }
+
+        private void btnDown_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var scrollViwer = GetScrollViewer(lvEvents) as ScrollViewer;
+
+            if (scrollViwer != null)
+            {
+                scrollViwer.ScrollToVerticalOffset(scrollViwer.VerticalOffset + 1);
+            }
+        }
     }
 }

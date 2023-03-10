@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BuildingTypes.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
     <Compile Include="classes\Base.cs" />
     <Compile Include="BaseDate.cs">
       <AutoGen>True</AutoGen>
@@ -71,10 +74,64 @@
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Compile Include="classes\PartialEmployess.cs" />
+    <Compile Include="ConnectedServices.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contracts.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employees.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="EquipmentInstallations.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipments.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Events.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PassportDate.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProblemTypes.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Raions.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReasonForTerminations.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentialAddress.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Roles.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceStatus.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceTypes.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subscribers.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeContracts.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeOfServices.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">

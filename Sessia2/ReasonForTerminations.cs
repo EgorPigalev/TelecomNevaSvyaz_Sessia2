@@ -12,21 +12,18 @@ namespace Sessia2
     using System;
     using System.Collections.Generic;
     
-    public partial class Roles
+    public partial class ReasonForTerminations
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roles()
+        public ReasonForTerminations()
         {
-            this.Employees = new HashSet<Employees>();
-            this.Events = new HashSet<Events>();
+            this.Contracts = new HashSet<Contracts>();
         }
     
-        public int RoleID { get; set; }
-        public string Role { get; set; }
+        public int ReasonForTerminationID { get; set; }
+        public string ReasonForTermination { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees> Employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Events> Events { get; set; }
+        public virtual ICollection<Contracts> Contracts { get; set; }
     }
 }

@@ -12,21 +12,26 @@ namespace Sessia2
     using System;
     using System.Collections.Generic;
     
-    public partial class Roles
+    public partial class Contracts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Roles()
+        public Contracts()
         {
-            this.Employees = new HashSet<Employees>();
-            this.Events = new HashSet<Events>();
+            this.ConnectedServices = new HashSet<ConnectedServices>();
         }
     
-        public int RoleID { get; set; }
-        public string Role { get; set; }
+        public int SubscribersID { get; set; }
+        public int ContractNumber { get; set; }
+        public System.DateTime DateOfCinclusion { get; set; }
+        public int PersonalAccount { get; set; }
+        public int TypeContractID { get; set; }
+        public Nullable<int> ReasonForTerminationID { get; set; }
+        public Nullable<System.DateTime> TermibationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees> Employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Events> Events { get; set; }
+        public virtual ICollection<ConnectedServices> ConnectedServices { get; set; }
+        public virtual ReasonForTerminations ReasonForTerminations { get; set; }
+        public virtual Subscribers Subscribers { get; set; }
+        public virtual TypeContracts TypeContracts { get; set; }
     }
 }

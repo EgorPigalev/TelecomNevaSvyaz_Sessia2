@@ -8,18 +8,65 @@
         Title="ООО «Телеком Нева Связь»" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="170"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="0">
+            <StackPanel>
+                <Image Source="/resources/Лого ТНС.jpg" Width="150" Margin="10"/>
+                <TextBlock Text="Абоненты" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20"/>
+                <TextBlock Text="Управление оборудованием" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" TextWrapping="Wrap"/>
+                <TextBlock Text="Активы" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" TextWrapping="Wrap"/>
+                <TextBlock Text="Биллинг" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" TextWrapping="Wrap"/>
+                <TextBlock Text="Поддержка пользователей" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" TextWrapping="Wrap"/>
+                <TextBlock Text="CRM" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom">
+                <TextBlock Text="Проф."/>
+                <TextBlock Text="?"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <ComboBox Name="cbFIOEmployee" Width="180" VerticalAlignment="Center"/>
+                <ComboBox Name="cbFIOEmployee" Width="180" VerticalAlignment="Center" SelectionChanged="cbFIOEmployee_SelectionChanged"/>
                 <Image Source="/resources/Фото для заглушки при отсутствии фото сотрудника.jpg" Width="60" Height="60"/>
             </StackPanel>
+            <StackPanel Grid.Row="1" Background="#FFEAEAEA">
+                <TextBlock Text="События" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Grid Grid.Row="2" Background="#FFEAEAEA">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="btnUp" Grid.Row="0" VerticalAlignment="Center" MouseUp="btnUp_MouseDown">
+                    <Polyline Stroke="Black" Points="0, 15, 15, 5, 30, 15" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <ListView x:Name="lvEvents" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#FFEAEAEA">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="LightGray" Width="220">
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackPanel Grid.Row="2" MouseDown="btnDown_MouseDown">
+                    <Polyline x:Name="btnDown" Stroke="Black" Points="0, 15, 15, 25, 30, 15" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
