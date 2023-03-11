@@ -33,9 +33,52 @@ namespace Sessia2
         private void cbFIOEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.EmployeeID == cbFIOEmployee.SelectedIndex + 1);
-            if(employee != null)
+            if (employee != null) // Изменение списка событий
             {
                 lvEvents.ItemsSource = Base.baseDate.Events.Where(x => x.RoleID == employee.RoleID).ToList();
+            }
+            List<AvailableModules> availableModules = Base.baseDate.AvailableModules.Where(x => x.RoleID == employee.RoleID).ToList(); // Изменение доступных модулей
+            imSubscriber.Visibility = Visibility.Collapsed;             // Скрытие всех элементов
+            imEquipmentManagement.Visibility = Visibility.Collapsed;
+            imAssets.Visibility = Visibility.Collapsed;
+            imBilling.Visibility = Visibility.Collapsed;
+            imUserSupport.Visibility = Visibility.Collapsed;
+            imCRM.Visibility = Visibility.Collapsed;
+            lbSubscriber.Visibility = Visibility.Collapsed;
+            lbEquipmentManagement.Visibility = Visibility.Collapsed;
+            lbAssets.Visibility = Visibility.Collapsed;
+            lbBilling.Visibility = Visibility.Collapsed;
+            lbUserSupport.Visibility = Visibility.Collapsed;
+            lbCRM.Visibility = Visibility.Collapsed;
+            foreach (AvailableModules module in availableModules) // Показ доступных модулей
+            {
+                switch(module.Modules.ModuleName)
+                {
+                    case "Абоненты":
+                        imSubscriber.Visibility = Visibility.Visible;
+                        lbSubscriber.Visibility= Visibility.Visible;
+                        break;
+                    case "CRM":
+                        imEquipmentManagement.Visibility = Visibility.Visible;
+                        lbEquipmentManagement.Visibility = Visibility.Visible;
+                        break;
+                    case "Биллинг":
+                        imAssets.Visibility = Visibility.Visible;
+                        lbAssets.Visibility = Visibility.Visible;
+                        break;
+                    case "Поддержка пользователей":
+                        imBilling.Visibility = Visibility.Visible;
+                        lbBilling.Visibility = Visibility.Visible;
+                        break;
+                    case "Управление оборудованием":
+                        imUserSupport.Visibility = Visibility.Visible;
+                        lbUserSupport.Visibility = Visibility.Visible;
+                        break;
+                    case "Активы":
+                        imCRM.Visibility = Visibility.Visible;
+                        lbCRM.Visibility = Visibility.Visible;
+                        break;
+                }
             }
         }
 
@@ -79,6 +122,20 @@ namespace Sessia2
             {
                 scrollViwer.ScrollToVerticalOffset(scrollViwer.VerticalOffset + 1);
             }
+        }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            cd.Width = new GridLength(200);
+            spOpen.Visibility = Visibility.Visible;
+            spClose.Visibility = Visibility.Collapsed;
+        }
+
+        private void Grid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            cd.Width = new GridLength(100);
+            spOpen.Visibility = Visibility.Collapsed;
+            spClose.Visibility = Visibility.Visible;
         }
     }
 }

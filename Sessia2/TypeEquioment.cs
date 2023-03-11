@@ -12,13 +12,18 @@ namespace Sessia2
     using System;
     using System.Collections.Generic;
     
-    public partial class PassportDate
+    public partial class TypeEquioment
     {
-        public int PassportID { get; set; }
-        public string Seria { get; set; }
-        public string Nomer { get; set; }
-        public string DivisionCode { get; set; }
-        public string IssuedBy { get; set; }
-        public System.DateTime DateOfIssue { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TypeEquioment()
+        {
+            this.Equipments = new HashSet<Equipments>();
+        }
+    
+        public int TypeEquipmentID { get; set; }
+        public string TypeEquipment { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipments> Equipments { get; set; }
     }
 }

@@ -12,23 +12,18 @@ namespace Sessia2
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipments
+    public partial class Modules
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipments()
+        public Modules()
         {
-            this.EquipmentInstallations = new HashSet<EquipmentInstallations>();
+            this.AvailableModules = new HashSet<AvailableModules>();
         }
     
-        public int EquiomentID { get; set; }
-        public string EquiomentName { get; set; }
-        public int TypeEquipmentID { get; set; }
-        public string InvertaryNumberOS { get; set; }
-        public string MACAdress { get; set; }
-        public string SerialNumber { get; set; }
+        public int ModuleID { get; set; }
+        public string ModuleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EquipmentInstallations> EquipmentInstallations { get; set; }
-        public virtual TypeEquioment TypeEquioment { get; set; }
+        public virtual ICollection<AvailableModules> AvailableModules { get; set; }
     }
 }

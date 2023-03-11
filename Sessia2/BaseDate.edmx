@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище CRM18Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AvailableModules">
+          <Key>
+            <PropertyRef Name="AvailableModuleID" />
+          </Key>
+          <Property Name="AvailableModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="BuildingTypes">
           <Key>
             <PropertyRef Name="BuildingTypeID" />
@@ -81,11 +89,11 @@
             <PropertyRef Name="EquiomentID" />
           </Key>
           <Property Name="EquiomentID" Type="int" Nullable="false" />
-          <Property Name="EquiomentName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TypeEquipmentID" Type="int" />
+          <Property Name="EquiomentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypeEquipmentID" Type="int" Nullable="false" />
           <Property Name="InvertaryNumberOS" Type="nvarchar" MaxLength="50" />
           <Property Name="MACAdress" Type="nvarchar" MaxLength="50" />
-          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Events">
           <Key>
@@ -103,16 +111,12 @@
           <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="PassportDate">
+        <EntityType Name="Modules">
           <Key>
-            <PropertyRef Name="PassportID" />
+            <PropertyRef Name="ModuleID" />
           </Key>
-          <Property Name="PassportID" Type="int" Nullable="false" />
-          <Property Name="Seria" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nomer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IssuedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateOfIssue" Type="date" Nullable="false" />
+          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ProblemTypes">
           <Key>
@@ -192,10 +196,10 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Place0fResidence" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Seria" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nomer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DivisionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IssuedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seria" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nomer" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="DivisionCode" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="IssuedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DateOfIssue" Type="date" Nullable="false" />
           <Property Name="ServiceContractID" Type="int" Nullable="false" />
         </EntityType>
@@ -206,6 +210,13 @@
           <Property Name="TypeContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeContract" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="TypeEquioment">
+          <Key>
+            <PropertyRef Name="TypeEquipmentID" />
+          </Key>
+          <Property Name="TypeEquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeEquipment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="TypeOfServices">
           <Key>
             <PropertyRef Name="TypeOfServiceID" />
@@ -213,6 +224,30 @@
           <Property Name="TypeOfServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeOfService" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AvailableModules_Modeles">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="AvailableModules" Type="Self.AvailableModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="AvailableModules">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvailableModules_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AvailableModules" Type="Self.AvailableModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="AvailableModules">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ConnectedServices_Contracts">
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
           <End Role="ConnectedServices" Type="Self.ConnectedServices" Multiplicity="*" />
@@ -393,6 +428,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Equipments_TypeEquioment">
+          <End Role="TypeEquioment" Type="Self.TypeEquioment" Multiplicity="1" />
+          <End Role="Equipments" Type="Self.Equipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEquioment">
+              <PropertyRef Name="TypeEquipmentID" />
+            </Principal>
+            <Dependent Role="Equipments">
+              <PropertyRef Name="TypeEquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Events_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Events" Type="Self.Events" Multiplicity="*" />
@@ -454,6 +501,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище CRM18ModelContainer">
+          <EntitySet Name="AvailableModules" EntityType="Self.AvailableModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BuildingTypes" EntityType="Self.BuildingTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConnectedServices" EntityType="Self.ConnectedServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
@@ -463,7 +511,7 @@
           <EntitySet Name="Equipments" EntityType="Self.Equipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PassportDate" EntityType="Self.PassportDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProblemTypes" EntityType="Self.ProblemTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Raions" EntityType="Self.Raions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReasonForTerminations" EntityType="Self.ReasonForTerminations" Schema="dbo" store:Type="Tables" />
@@ -474,7 +522,16 @@
           <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscribers" EntityType="Self.Subscribers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeContracts" EntityType="Self.TypeContracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeEquioment" EntityType="Self.TypeEquioment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfServices" EntityType="Self.TypeOfServices" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AvailableModules_Modeles" Association="Self.FK_AvailableModules_Modeles">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="AvailableModules" EntitySet="AvailableModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvailableModules_Roles" Association="Self.FK_AvailableModules_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AvailableModules" EntitySet="AvailableModules" />
+          </AssociationSet>
           <AssociationSet Name="FK_ConnectedServices_Contracts" Association="Self.FK_ConnectedServices_Contracts">
             <End Role="Contracts" EntitySet="Contracts" />
             <End Role="ConnectedServices" EntitySet="ConnectedServices" />
@@ -535,6 +592,10 @@
             <End Role="Subscribers" EntitySet="Subscribers" />
             <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Equipments_TypeEquioment" Association="Self.FK_Equipments_TypeEquioment">
+            <End Role="TypeEquioment" EntitySet="TypeEquioment" />
+            <End Role="Equipments" EntitySet="Equipments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Events_Roles" Association="Self.FK_Events_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Events" EntitySet="Events" />
@@ -561,6 +622,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="CRM18Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BaseDate" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AvailableModules" EntityType="CRM18Model.AvailableModules" />
           <EntitySet Name="BuildingTypes" EntityType="CRM18Model.BuildingTypes" />
           <EntitySet Name="ConnectedServices" EntityType="CRM18Model.ConnectedServices" />
           <EntitySet Name="Contracts" EntityType="CRM18Model.Contracts" />
@@ -570,7 +632,7 @@
           <EntitySet Name="Equipments" EntityType="CRM18Model.Equipments" />
           <EntitySet Name="Events" EntityType="CRM18Model.Events" />
           <EntitySet Name="Gender" EntityType="CRM18Model.Gender" />
-          <EntitySet Name="PassportDate" EntityType="CRM18Model.PassportDate" />
+          <EntitySet Name="Modules" EntityType="CRM18Model.Modules" />
           <EntitySet Name="ProblemTypes" EntityType="CRM18Model.ProblemTypes" />
           <EntitySet Name="Raions" EntityType="CRM18Model.Raions" />
           <EntitySet Name="ReasonForTerminations" EntityType="CRM18Model.ReasonForTerminations" />
@@ -581,7 +643,16 @@
           <EntitySet Name="ServiceTypes" EntityType="CRM18Model.ServiceTypes" />
           <EntitySet Name="Subscribers" EntityType="CRM18Model.Subscribers" />
           <EntitySet Name="TypeContracts" EntityType="CRM18Model.TypeContracts" />
+          <EntitySet Name="TypeEquioment" EntityType="CRM18Model.TypeEquioment" />
           <EntitySet Name="TypeOfServices" EntityType="CRM18Model.TypeOfServices" />
+          <AssociationSet Name="FK_AvailableModules_Modeles" Association="CRM18Model.FK_AvailableModules_Modeles">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="AvailableModules" EntitySet="AvailableModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvailableModules_Roles" Association="CRM18Model.FK_AvailableModules_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AvailableModules" EntitySet="AvailableModules" />
+          </AssociationSet>
           <AssociationSet Name="FK_Raions_BuildingTypes" Association="CRM18Model.FK_Raions_BuildingTypes">
             <End Role="BuildingTypes" EntitySet="BuildingTypes" />
             <End Role="Raions" EntitySet="Raions" />
@@ -646,6 +717,10 @@
             <End Role="Subscribers" EntitySet="Subscribers" />
             <End Role="EquipmentInstallations" EntitySet="EquipmentInstallations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Equipments_TypeEquioment" Association="CRM18Model.FK_Equipments_TypeEquioment">
+            <End Role="TypeEquioment" EntitySet="TypeEquioment" />
+            <End Role="Equipments" EntitySet="Equipments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Events_Roles" Association="CRM18Model.FK_Events_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Events" EntitySet="Events" />
@@ -663,6 +738,16 @@
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AvailableModules">
+          <Key>
+            <PropertyRef Name="AvailableModuleID" />
+          </Key>
+          <Property Name="AvailableModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Modules" Relationship="CRM18Model.FK_AvailableModules_Modeles" FromRole="AvailableModules" ToRole="Modules" />
+          <NavigationProperty Name="Roles" Relationship="CRM18Model.FK_AvailableModules_Roles" FromRole="AvailableModules" ToRole="Roles" />
+        </EntityType>
         <EntityType Name="BuildingTypes">
           <Key>
             <PropertyRef Name="BuildingTypeID" />
@@ -757,12 +842,13 @@
             <PropertyRef Name="EquiomentID" />
           </Key>
           <Property Name="EquiomentID" Type="Int32" Nullable="false" />
-          <Property Name="EquiomentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TypeEquipmentID" Type="Int32" />
+          <Property Name="EquiomentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TypeEquipmentID" Type="Int32" Nullable="false" />
           <Property Name="InvertaryNumberOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MACAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Equipments" FromRole="Equipments" ToRole="EquipmentInstallations" />
+          <NavigationProperty Name="TypeEquioment" Relationship="CRM18Model.FK_Equipments_TypeEquioment" FromRole="Equipments" ToRole="TypeEquioment" />
         </EntityType>
         <EntityType Name="Events">
           <Key>
@@ -782,16 +868,13 @@
           <Property Name="Gender1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_Gender" FromRole="Gender" ToRole="Subscribers" />
         </EntityType>
-        <EntityType Name="PassportDate">
+        <EntityType Name="Modules">
           <Key>
-            <PropertyRef Name="PassportID" />
+            <PropertyRef Name="ModuleID" />
           </Key>
-          <Property Name="PassportID" Type="Int32" Nullable="false" />
-          <Property Name="Seria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Nomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DivisionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IssuedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AvailableModules" Relationship="CRM18Model.FK_AvailableModules_Modeles" FromRole="Modules" ToRole="AvailableModules" />
         </EntityType>
         <EntityType Name="ProblemTypes">
           <Key>
@@ -840,6 +923,7 @@
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AvailableModules" Relationship="CRM18Model.FK_AvailableModules_Roles" FromRole="Roles" ToRole="AvailableModules" />
           <NavigationProperty Name="Employees" Relationship="CRM18Model.FK_Employees_Roles" FromRole="Roles" ToRole="Employees" />
           <NavigationProperty Name="Events" Relationship="CRM18Model.FK_Events_Roles" FromRole="Roles" ToRole="Events" />
         </EntityType>
@@ -883,10 +967,10 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Place0fResidence" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Seria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Nomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DivisionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IssuedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seria" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Nomer" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="DivisionCode" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ServiceContractID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_Subscribers" FromRole="Subscribers" ToRole="Contracts" />
@@ -903,6 +987,14 @@
           <Property Name="TypeContract" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_TypeContracts" FromRole="TypeContracts" ToRole="Contracts" />
         </EntityType>
+        <EntityType Name="TypeEquioment">
+          <Key>
+            <PropertyRef Name="TypeEquipmentID" />
+          </Key>
+          <Property Name="TypeEquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeEquipment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipments" Relationship="CRM18Model.FK_Equipments_TypeEquioment" FromRole="TypeEquioment" ToRole="Equipments" />
+        </EntityType>
         <EntityType Name="TypeOfServices">
           <Key>
             <PropertyRef Name="TypeOfServiceID" />
@@ -911,6 +1003,30 @@
           <Property Name="TypeOfService" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_TypeOfServices" FromRole="TypeOfServices" ToRole="CRM" />
         </EntityType>
+        <Association Name="FK_AvailableModules_Modeles">
+          <End Type="CRM18Model.Modules" Role="Modules" Multiplicity="1" />
+          <End Type="CRM18Model.AvailableModules" Role="AvailableModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="AvailableModules">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvailableModules_Roles">
+          <End Type="CRM18Model.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="CRM18Model.AvailableModules" Role="AvailableModules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="AvailableModules">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Raions_BuildingTypes">
           <End Type="CRM18Model.BuildingTypes" Role="BuildingTypes" Multiplicity="1" />
           <End Type="CRM18Model.Raions" Role="Raions" Multiplicity="*" />
@@ -1103,6 +1219,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Equipments_TypeEquioment">
+          <End Type="CRM18Model.TypeEquioment" Role="TypeEquioment" Multiplicity="1" />
+          <End Type="CRM18Model.Equipments" Role="Equipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEquioment">
+              <PropertyRef Name="TypeEquipmentID" />
+            </Principal>
+            <Dependent Role="Equipments">
+              <PropertyRef Name="TypeEquipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Events_Roles">
           <End Type="CRM18Model.Roles" Role="Roles" Multiplicity="1" />
           <End Type="CRM18Model.Events" Role="Events" Multiplicity="*" />
@@ -1151,12 +1279,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище CRM18ModelContainer" CdmEntityContainer="BaseDate">
+          <EntitySetMapping Name="AvailableModules">
+            <EntityTypeMapping TypeName="CRM18Model.AvailableModules">
+              <MappingFragment StoreEntitySet="AvailableModules">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="AvailableModuleID" ColumnName="AvailableModuleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BuildingTypes">
             <EntityTypeMapping TypeName="CRM18Model.BuildingTypes">
               <MappingFragment StoreEntitySet="BuildingTypes">
@@ -1264,15 +1401,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PassportDate">
-            <EntityTypeMapping TypeName="CRM18Model.PassportDate">
-              <MappingFragment StoreEntitySet="PassportDate">
-                <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
-                <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
-                <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />
-                <ScalarProperty Name="Nomer" ColumnName="Nomer" />
-                <ScalarProperty Name="Seria" ColumnName="Seria" />
-                <ScalarProperty Name="PassportID" ColumnName="PassportID" />
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="CRM18Model.Modules">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1375,6 +1508,14 @@
               <MappingFragment StoreEntitySet="TypeContracts">
                 <ScalarProperty Name="TypeContract" ColumnName="TypeContract" />
                 <ScalarProperty Name="TypeContractID" ColumnName="TypeContractID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeEquioment">
+            <EntityTypeMapping TypeName="CRM18Model.TypeEquioment">
+              <MappingFragment StoreEntitySet="TypeEquioment">
+                <ScalarProperty Name="TypeEquipment" ColumnName="TypeEquipment" />
+                <ScalarProperty Name="TypeEquipmentID" ColumnName="TypeEquipmentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

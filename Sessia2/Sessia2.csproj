@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AvailableModules.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
     <Compile Include="BuildingTypes.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
@@ -98,7 +101,7 @@
     <Compile Include="Gender.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
-    <Compile Include="PassportDate.cs">
+    <Compile Include="Modules.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Compile Include="ProblemTypes.cs">
@@ -129,6 +132,9 @@
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Compile Include="TypeContracts.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TypeEquioment.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Compile Include="TypeOfServices.cs">
@@ -207,6 +213,12 @@
       <DependentUpon>BaseDate.edmx</DependentUpon>
       <LastGenOutput>BaseDate.cs</LastGenOutput>
     </Content>
+    <Resource Include="resources\CRM.png" />
+    <Resource Include="resources\Абоненты.png" />
+    <Resource Include="resources\Активы.png" />
+    <Resource Include="resources\Биллинг.jpg" />
+    <Resource Include="resources\Поддержка пользователей.jpg" />
+    <Resource Include="resources\Управление обрудованием.jpg" />
     <Resource Include="resources\Фото для заглушки при отсутствии фото сотрудника.jpg" />
     <Resource Include="image\ID1516.jpg" />
     <Resource Include="image\ID1517.png" />
