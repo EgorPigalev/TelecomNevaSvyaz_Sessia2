@@ -27,16 +27,17 @@
           <Property Name="ConnectedServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubscribersID" Type="int" Nullable="false" />
           <Property Name="ServicesID" Type="int" Nullable="false" />
+          <Property Name="ConnectionDate" Type="date" />
         </EntityType>
         <EntityType Name="Contracts">
           <Key>
             <PropertyRef Name="SubscribersID" />
           </Key>
           <Property Name="SubscribersID" Type="int" Nullable="false" />
-          <Property Name="ContractNumber" Type="int" Nullable="false" />
+          <Property Name="ContractNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateOfCinclusion" Type="date" Nullable="false" />
-          <Property Name="PersonalAccount" Type="int" Nullable="false" />
           <Property Name="TypeContractID" Type="int" Nullable="false" />
+          <Property Name="PersonalAccount" Type="int" Nullable="false" />
           <Property Name="ReasonForTerminationID" Type="int" />
           <Property Name="TermibationDate" Type="date" />
         </EntityType>
@@ -47,13 +48,13 @@
           <Property Name="CRMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NumberCRM" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateCreation" Type="date" Nullable="false" />
-          <Property Name="SubscriberID" Type="int" />
+          <Property Name="SubscriberID" Type="int" Nullable="false" />
           <Property Name="ServicesID" Type="int" Nullable="false" />
           <Property Name="TypeOfServiceID" Type="int" Nullable="false" />
           <Property Name="ServiceTypeID" Type="int" Nullable="false" />
           <Property Name="ServiceStatusID" Type="int" Nullable="false" />
           <Property Name="ProblemTypeID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="400" />
           <Property Name="ClosingDate" Type="date" />
         </EntityType>
         <EntityType Name="Employees">
@@ -73,22 +74,19 @@
           <Key>
             <PropertyRef Name="InstallationEquipmentID" />
           </Key>
-          <Property Name="InstallationEquipmentID" Type="int" Nullable="false" />
-          <Property Name="InstallationDate" Type="date" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="InstallationEquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallationDate" Type="date" />
+          <Property Name="EmployeeID" Type="int" />
           <Property Name="EquipmentID" Type="int" Nullable="false" />
-          <Property Name="InstallitionAdressID" Type="int" Nullable="false" />
           <Property Name="SubscriberID" Type="int" Nullable="false" />
-          <Property Name="ConnectionPoint" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GeographicCoordinates" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Notes" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="400" />
           <Property Name="Rental" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipments">
           <Key>
             <PropertyRef Name="EquiomentID" />
           </Key>
-          <Property Name="EquiomentID" Type="int" Nullable="false" />
+          <Property Name="EquiomentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EquiomentName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TypeEquipmentID" Type="int" Nullable="false" />
           <Property Name="InvertaryNumberOS" Type="nvarchar" MaxLength="50" />
@@ -122,7 +120,7 @@
           <Key>
             <PropertyRef Name="ProblemTypeID" />
           </Key>
-          <Property Name="ProblemTypeID" Type="int" Nullable="false" />
+          <Property Name="ProblemTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProblemType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Raions">
@@ -147,11 +145,11 @@
           <Key>
             <PropertyRef Name="ResidentialAddressID" />
           </Key>
-          <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PrefixCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RaionID" Type="int" Nullable="false" />
-          <Property Name="Prefix" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="House" Type="int" Nullable="false" />
+          <Property Name="Prefix" Type="nvarchar" MaxLength="100" />
+          <Property Name="House" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -164,7 +162,7 @@
           <Key>
             <PropertyRef Name="ServicesID" />
           </Key>
-          <Property Name="ServicesID" Type="int" Nullable="false" />
+          <Property Name="ServicesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Services" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiceStatus">
@@ -192,23 +190,22 @@
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GenderID" Type="int" Nullable="false" />
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Place0fResidence" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Seria" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="Nomer" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="DivisionCode" Type="nvarchar" MaxLength="7" Nullable="false" />
           <Property Name="IssuedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DateOfIssue" Type="date" Nullable="false" />
-          <Property Name="ServiceContractID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeContracts">
           <Key>
             <PropertyRef Name="TypeContractID" />
           </Key>
           <Property Name="TypeContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeContract" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TypeContract" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeEquioment">
           <Key>
@@ -357,7 +354,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CRM_Subscribers">
-          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="0..1" />
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="1" />
           <End Role="CRM" Type="Self.CRM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subscribers">
@@ -393,7 +390,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EquipmentInstallations_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="EquipmentInstallations" Type="Self.EquipmentInstallations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -763,6 +760,7 @@
           <Property Name="ConnectedServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SubscribersID" Type="Int32" Nullable="false" />
           <Property Name="ServicesID" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_ConnectedServices_Contracts" FromRole="ConnectedServices" ToRole="Contracts" />
           <NavigationProperty Name="Services" Relationship="CRM18Model.FK_ConnectedServices_Services" FromRole="ConnectedServices" ToRole="Services" />
         </EntityType>
@@ -771,10 +769,10 @@
             <PropertyRef Name="SubscribersID" />
           </Key>
           <Property Name="SubscribersID" Type="Int32" Nullable="false" />
-          <Property Name="ContractNumber" Type="Int32" Nullable="false" />
+          <Property Name="ContractNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateOfCinclusion" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PersonalAccount" Type="Int32" Nullable="false" />
           <Property Name="TypeContractID" Type="Int32" Nullable="false" />
+          <Property Name="PersonalAccount" Type="Int32" Nullable="false" />
           <Property Name="ReasonForTerminationID" Type="Int32" />
           <Property Name="TermibationDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ConnectedServices" Relationship="CRM18Model.FK_ConnectedServices_Contracts" FromRole="Contracts" ToRole="ConnectedServices" />
@@ -789,13 +787,13 @@
           <Property Name="CRMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NumberCRM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SubscriberID" Type="Int32" />
+          <Property Name="SubscriberID" Type="Int32" Nullable="false" />
           <Property Name="ServicesID" Type="Int32" Nullable="false" />
           <Property Name="TypeOfServiceID" Type="Int32" Nullable="false" />
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
           <Property Name="ServiceStatusID" Type="Int32" Nullable="false" />
           <Property Name="ProblemTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="ClosingDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ProblemTypes" Relationship="CRM18Model.FK_CRM_ProblemTypes" FromRole="CRM" ToRole="ProblemTypes" />
           <NavigationProperty Name="Services" Relationship="CRM18Model.FK_CRM_Services" FromRole="CRM" ToRole="Services" />
@@ -823,15 +821,12 @@
           <Key>
             <PropertyRef Name="InstallationEquipmentID" />
           </Key>
-          <Property Name="InstallationEquipmentID" Type="Int32" Nullable="false" />
-          <Property Name="InstallationDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="InstallationEquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallationDate" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeID" Type="Int32" />
           <Property Name="EquipmentID" Type="Int32" Nullable="false" />
-          <Property Name="InstallitionAdressID" Type="Int32" Nullable="false" />
           <Property Name="SubscriberID" Type="Int32" Nullable="false" />
-          <Property Name="ConnectionPoint" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GeographicCoordinates" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="Rental" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="CRM18Model.FK_EquipmentInstallations_Employees" FromRole="EquipmentInstallations" ToRole="Employees" />
           <NavigationProperty Name="Equipments" Relationship="CRM18Model.FK_EquipmentInstallations_Equipments" FromRole="EquipmentInstallations" ToRole="Equipments" />
@@ -841,7 +836,7 @@
           <Key>
             <PropertyRef Name="EquiomentID" />
           </Key>
-          <Property Name="EquiomentID" Type="Int32" Nullable="false" />
+          <Property Name="EquiomentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EquiomentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TypeEquipmentID" Type="Int32" Nullable="false" />
           <Property Name="InvertaryNumberOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -880,7 +875,7 @@
           <Key>
             <PropertyRef Name="ProblemTypeID" />
           </Key>
-          <Property Name="ProblemTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ProblemTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProblemType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_ProblemTypes" FromRole="ProblemTypes" ToRole="CRM" />
         </EntityType>
@@ -909,11 +904,11 @@
           <Key>
             <PropertyRef Name="ResidentialAddressID" />
           </Key>
-          <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrefixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RaionID" Type="Int32" Nullable="false" />
-          <Property Name="Prefix" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="House" Type="Int32" Nullable="false" />
+          <Property Name="Prefix" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="House" Type="Int32" />
           <NavigationProperty Name="Raions" Relationship="CRM18Model.FK_ResidentialAddress_Raions" FromRole="ResidentialAddress" ToRole="Raions" />
           <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="ResidentialAddress" ToRole="Subscribers" />
         </EntityType>
@@ -931,7 +926,7 @@
           <Key>
             <PropertyRef Name="ServicesID" />
           </Key>
-          <Property Name="ServicesID" Type="Int32" Nullable="false" />
+          <Property Name="ServicesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Services1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ConnectedServices" Relationship="CRM18Model.FK_ConnectedServices_Services" FromRole="Services" ToRole="ConnectedServices" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_Services" FromRole="Services" ToRole="CRM" />
@@ -963,16 +958,15 @@
           <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GenderID" Type="Int32" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Place0fResidence" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Seria" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="Nomer" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="DivisionCode" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
           <Property Name="IssuedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ServiceContractID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_Subscribers" FromRole="Subscribers" ToRole="Contracts" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_Subscribers" FromRole="Subscribers" ToRole="CRM" />
           <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Subscribers" FromRole="Subscribers" ToRole="EquipmentInstallations" />
@@ -984,7 +978,7 @@
             <PropertyRef Name="TypeContractID" />
           </Key>
           <Property Name="TypeContractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeContract" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TypeContract" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Contracts" Relationship="CRM18Model.FK_Contracts_TypeContracts" FromRole="TypeContracts" ToRole="Contracts" />
         </EntityType>
         <EntityType Name="TypeEquioment">
@@ -1148,7 +1142,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CRM_Subscribers">
-          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="0..1" />
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="1" />
           <End Type="CRM18Model.CRM" Role="CRM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subscribers">
@@ -1184,7 +1178,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EquipmentInstallations_Employees">
-          <End Type="CRM18Model.Employees" Role="Employees" Multiplicity="1" />
+          <End Type="CRM18Model.Employees" Role="Employees" Multiplicity="0..1" />
           <End Type="CRM18Model.EquipmentInstallations" Role="EquipmentInstallations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -1305,6 +1299,7 @@
           <EntitySetMapping Name="ConnectedServices">
             <EntityTypeMapping TypeName="CRM18Model.ConnectedServices">
               <MappingFragment StoreEntitySet="ConnectedServices">
+                <ScalarProperty Name="ConnectionDate" ColumnName="ConnectionDate" />
                 <ScalarProperty Name="ServicesID" ColumnName="ServicesID" />
                 <ScalarProperty Name="SubscribersID" ColumnName="SubscribersID" />
                 <ScalarProperty Name="ConnectedServiceID" ColumnName="ConnectedServiceID" />
@@ -1316,8 +1311,8 @@
               <MappingFragment StoreEntitySet="Contracts">
                 <ScalarProperty Name="TermibationDate" ColumnName="TermibationDate" />
                 <ScalarProperty Name="ReasonForTerminationID" ColumnName="ReasonForTerminationID" />
-                <ScalarProperty Name="TypeContractID" ColumnName="TypeContractID" />
                 <ScalarProperty Name="PersonalAccount" ColumnName="PersonalAccount" />
+                <ScalarProperty Name="TypeContractID" ColumnName="TypeContractID" />
                 <ScalarProperty Name="DateOfCinclusion" ColumnName="DateOfCinclusion" />
                 <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
                 <ScalarProperty Name="SubscribersID" ColumnName="SubscribersID" />
@@ -1360,10 +1355,7 @@
               <MappingFragment StoreEntitySet="EquipmentInstallations">
                 <ScalarProperty Name="Rental" ColumnName="Rental" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="GeographicCoordinates" ColumnName="GeographicCoordinates" />
-                <ScalarProperty Name="ConnectionPoint" ColumnName="ConnectionPoint" />
                 <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
-                <ScalarProperty Name="InstallitionAdressID" ColumnName="InstallitionAdressID" />
                 <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="InstallationDate" ColumnName="InstallationDate" />
@@ -1483,7 +1475,6 @@
           <EntitySetMapping Name="Subscribers">
             <EntityTypeMapping TypeName="CRM18Model.Subscribers">
               <MappingFragment StoreEntitySet="Subscribers">
-                <ScalarProperty Name="ServiceContractID" ColumnName="ServiceContractID" />
                 <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
                 <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
                 <ScalarProperty Name="DivisionCode" ColumnName="DivisionCode" />

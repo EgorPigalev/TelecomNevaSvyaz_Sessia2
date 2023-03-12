@@ -21,10 +21,10 @@ namespace Sessia2
         }
     
         public int SubscribersID { get; set; }
-        public int ContractNumber { get; set; }
+        public string ContractNumber { get; set; }
         public System.DateTime DateOfCinclusion { get; set; }
-        public int PersonalAccount { get; set; }
         public int TypeContractID { get; set; }
+        public int PersonalAccount { get; set; }
         public Nullable<int> ReasonForTerminationID { get; set; }
         public Nullable<System.DateTime> TermibationDate { get; set; }
     

@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sessia2"
         mc:Ignorable="d" Icon="/resources/image.ico" Style="{StaticResource WindowsMain}"
-        Title="ООО «Телеком Нева Связь»" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
+        Title="ООО «Телеком Нева Связь»" Height="800" Width="1250" MinHeight="800" MinWidth="1250">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="cd" Width="100"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" Background="White">
+        <Grid Grid.Column="0" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" Background="White" x:Name="cd" Width="100" HorizontalAlignment="Left" Panel.ZIndex="1000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="5"/>
@@ -27,7 +23,7 @@
             </StackPanel>
             <StackPanel x:Name="spOpen" Grid.Column="0" Visibility="Collapsed">
                 <Image Source="/resources/Лого ТНС.jpg" Width="150" Margin="10"/>
-                <Label Name="lbSubscriber" Content="Абоненты" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Name="lbSubscriber" Content="Абоненты" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbSubscriber_MouseDown"/>
                 <Label Name="lbEquipmentManagement" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                     <StackPanel>
                         <TextBlock Text="Управление" HorizontalAlignment="Center"/>
@@ -42,7 +38,7 @@
                         <TextBlock Text="пользователей" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Label>
-                <Label Name="lbCRM" Content="CRM" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Name="lbCRM" Content="CRM" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbCRM_MouseDown"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
                 <Button Content="проф." FontSize="18" Margin="5" Template="{StaticResource CTButon}" HorizontalAlignment="Center" Width="60" Height="60"/>
@@ -50,7 +46,7 @@
             </StackPanel>
             <Rectangle VerticalAlignment="Stretch" Fill="Black" Width="1" Grid.Column="1" HorizontalAlignment="Left" Margin="0"/>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Margin="100, 0, 0, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
                 <RowDefinition/>
@@ -60,13 +56,23 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="400"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Абоненты ТНС" VerticalAlignment="Center" FontSize="36" Margin="20"/>
+                <TextBlock Name="tbHeader" VerticalAlignment="Center" FontSize="36" Margin="20"/>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <ComboBox Name="cbFIOEmployee" Width="320" VerticalAlignment="Center" SelectionChanged="cbFIOEmployee_SelectionChanged"/>
-                    <Image Source="/resources/Фото для заглушки при отсутствии фото сотрудника.jpg" Margin="10, 0, 0, 0" Width="60" Height="60"/>
+                    <Rectangle RadiusX="100" RadiusY="100" Height="60" Width="60" Margin="5, 0, 0, 0">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="imUser" Stretch="UniformToFill"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Background="#FFEAEAEA" Width="240" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Label Content="События" HorizontalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Background="#FFEAEAEA" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                    <Rectangle HorizontalAlignment="Stretch" Fill="Black" Height="1" Grid.Column="1" Margin="0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Background="#FFEAEAEA" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" >
+                    <Rectangle HorizontalAlignment="Stretch" Fill="Black" Height="1" Grid.Column="1" Margin="0"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -84,7 +90,6 @@
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
                     <StackPanel x:Name="btnUp" Grid.Row="0" MouseUp="btnUp_MouseDown" Background="#FFEAEAEA">
-                        <Rectangle HorizontalAlignment="Stretch" Fill="Black" Height="1" Grid.Column="1" Margin="0"/>
                         <Polyline Stroke="Black" Points="0, 15, 15, 5, 30, 15" HorizontalAlignment="Center"/>
                     </StackPanel>
                     <ListView x:Name="lvEvents" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#FFEAEAEA">

@@ -37,7 +37,6 @@ namespace Sessia2
         public string DivisionCode { get; set; }
         public string IssuedBy { get; set; }
         public System.DateTime DateOfIssue { get; set; }
-        public int ServiceContractID { get; set; }
     
         public virtual Contracts Contracts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -15,13 +15,10 @@ namespace Sessia2
     public partial class EquipmentInstallations
     {
         public int InstallationEquipmentID { get; set; }
-        public System.DateTime InstallationDate { get; set; }
-        public int EmployeeID { get; set; }
+        public Nullable<System.DateTime> InstallationDate { get; set; }
+        public Nullable<int> EmployeeID { get; set; }
         public int EquipmentID { get; set; }
-        public int InstallitionAdressID { get; set; }
         public int SubscriberID { get; set; }
-        public string ConnectionPoint { get; set; }
-        public string GeographicCoordinates { get; set; }
         public string Notes { get; set; }
         public bool Rental { get; set; }
     

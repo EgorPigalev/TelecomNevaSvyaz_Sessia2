@@ -86,6 +86,9 @@
     <Compile Include="CRM.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="pages\CRMPage.xaml.cs">
+      <DependentUpon>CRMPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Employees.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
@@ -98,12 +101,14 @@
     <Compile Include="Events.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="classes\FrameClass.cs" />
     <Compile Include="Gender.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Compile Include="Modules.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="classes\PartialSubscribers.cs" />
     <Compile Include="ProblemTypes.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
@@ -128,8 +133,14 @@
     <Compile Include="ServiceTypes.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="pages\Subscribe.xaml.cs">
+      <DependentUpon>Subscribe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Subscribers.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SubscribersList.xaml.cs">
+      <DependentUpon>SubscribersList.xaml</DependentUpon>
     </Compile>
     <Compile Include="TypeContracts.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
@@ -140,6 +151,10 @@
     <Compile Include="TypeOfServices.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Page Include="pages\CRMPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -162,6 +177,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\SubscribersList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\Subscribe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -220,36 +243,36 @@
     <Resource Include="resources\Поддержка пользователей.jpg" />
     <Resource Include="resources\Управление обрудованием.jpg" />
     <Resource Include="resources\Фото для заглушки при отсутствии фото сотрудника.jpg" />
-    <Resource Include="image\ID1516.jpg" />
-    <Resource Include="image\ID1517.png" />
-    <Resource Include="image\ID1518.png" />
-    <Resource Include="image\ID1519.png" />
-    <Resource Include="image\ID1520.png" />
-    <Resource Include="image\ID1521.jpg" />
-    <Resource Include="image\ID1522.png" />
-    <Resource Include="image\ID1523.jpg" />
-    <Resource Include="image\ID1524.jpg" />
-    <Resource Include="image\ID1525.jpg" />
-    <Resource Include="image\ID1526.jpg" />
-    <Content Include="image\ID1527.jfif" />
-    <Resource Include="image\ID1528.jpg" />
-    <Resource Include="image\ID1529.jpg" />
-    <Resource Include="image\ID1530.jpg" />
-    <Resource Include="image\ID1531.jpg" />
-    <Resource Include="image\ID1532.jpg" />
-    <Resource Include="image\ID1533.jpg" />
-    <Resource Include="image\ID1534.jpg" />
-    <Resource Include="image\ID1535.png" />
-    <Resource Include="image\ID1536.png" />
-    <Resource Include="image\ID1537.jpg" />
-    <Resource Include="image\ID1538.jpg" />
-    <Resource Include="image\ID1539.png" />
-    <Resource Include="image\ID1540.jpg" />
-    <Resource Include="image\ID1541.jpg" />
-    <Resource Include="image\ID1542.jpg" />
-    <Resource Include="image\ID1543.jpg" />
-    <Resource Include="image\ID1544.jpg" />
-    <Resource Include="image\ID1545.jpg" />
+    <Resource Include="images\ID1516.jpg" />
+    <Resource Include="images\ID1517.png" />
+    <Resource Include="images\ID1518.png" />
+    <Resource Include="images\ID1519.png" />
+    <Resource Include="images\ID1520.png" />
+    <Resource Include="images\ID1521.jpg" />
+    <Resource Include="images\ID1522.png" />
+    <Resource Include="images\ID1523.jpg" />
+    <Resource Include="images\ID1524.jpg" />
+    <Resource Include="images\ID1525.jpg" />
+    <Resource Include="images\ID1526.jpg" />
+    <Content Include="images\ID1527.jfif" />
+    <Resource Include="images\ID1528.jpg" />
+    <Resource Include="images\ID1529.jpg" />
+    <Resource Include="images\ID1530.jpg" />
+    <Resource Include="images\ID1531.jpg" />
+    <Resource Include="images\ID1532.jpg" />
+    <Resource Include="images\ID1533.jpg" />
+    <Resource Include="images\ID1534.jpg" />
+    <Resource Include="images\ID1535.png" />
+    <Resource Include="images\ID1536.png" />
+    <Resource Include="images\ID1537.jpg" />
+    <Resource Include="images\ID1538.jpg" />
+    <Resource Include="images\ID1539.png" />
+    <Resource Include="images\ID1540.jpg" />
+    <Resource Include="images\ID1541.jpg" />
+    <Resource Include="images\ID1542.jpg" />
+    <Resource Include="images\ID1543.jpg" />
+    <Resource Include="images\ID1544.jpg" />
+    <Resource Include="images\ID1545.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

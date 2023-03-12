@@ -24,6 +24,8 @@ namespace Sessia2
         {
             InitializeComponent();
             Base.baseDate = new BaseDate();
+            FrameClass.frame = mainFrame;
+            FrameClass.frame.Navigate(new SubscribersList());
             cbFIOEmployee.ItemsSource = Base.baseDate.Employees.ToList();
             cbFIOEmployee.SelectedValuePath = "EmployeesID";
             cbFIOEmployee.DisplayMemberPath = "FIO";
@@ -33,6 +35,7 @@ namespace Sessia2
         private void cbFIOEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.EmployeeID == cbFIOEmployee.SelectedIndex + 1);
+            imUser.ImageSource = new BitmapImage(new Uri("" + employee.Image, UriKind.Relative));
             if (employee != null) // Изменение списка событий
             {
                 lvEvents.ItemsSource = Base.baseDate.Events.Where(x => x.RoleID == employee.RoleID).ToList();
@@ -126,16 +129,28 @@ namespace Sessia2
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
-            cd.Width = new GridLength(200);
+            cd.Width = 200;
             spOpen.Visibility = Visibility.Visible;
             spClose.Visibility = Visibility.Collapsed;
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
-            cd.Width = new GridLength(100);
+            cd.Width = 100;
             spOpen.Visibility = Visibility.Collapsed;
             spClose.Visibility = Visibility.Visible;
+        }
+
+        private void lbSubscriber_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameClass.frame.Navigate(new SubscribersList());
+            tbHeader.Text = "Абоненты ТНС";
+        }
+
+        private void lbCRM_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameClass.frame.Navigate(new CRMPage());
+            tbHeader.Text = "CRM";
         }
     }
 }

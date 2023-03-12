@@ -17,7 +17,7 @@ namespace Sessia2
         public int CRMID { get; set; }
         public string NumberCRM { get; set; }
         public System.DateTime DateCreation { get; set; }
-        public Nullable<int> SubscriberID { get; set; }
+        public int SubscriberID { get; set; }
         public int ServicesID { get; set; }
         public int TypeOfServiceID { get; set; }
         public int ServiceTypeID { get; set; }

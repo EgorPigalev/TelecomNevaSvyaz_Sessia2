@@ -8,6 +8,11 @@
             <Setter Property="FontFamily" Value=" Comic Sans MS"/>
             <Setter Property="FontSize" Value="24"/>
         </Style>
+        <Style x:Key="PageMain" TargetType="Page">
+            <Setter Property="FontFamily" Value=" Comic Sans MS"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
         <ControlTemplate x:Key="CTButon" TargetType="Button">
             <Border CornerRadius="40" BorderBrush="Black" BorderThickness="1" Background="{TemplateBinding Background}">
                 <ContentControl Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -28,6 +33,24 @@
                     </TransformGroup>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <ControlTemplate x:Key="CTButonMainPage" TargetType="Button">
+            <Border CornerRadius="20" BorderBrush="Black" BorderThickness="1" Background="{TemplateBinding Background}">
+                <ContentControl Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="BtnStyle" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Background" Value="#B5DEFA"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#4A67F7"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

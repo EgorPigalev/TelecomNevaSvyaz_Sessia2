@@ -1,0 +1,88 @@
+﻿<Page x:Class="Sessia2.Subscribe"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sessia2"
+      mc:Ignorable="d" Style="{StaticResource PageMain}"
+      d:DesignHeight="850" d:DesignWidth="900" Margin="10"
+      Title="Подробное описание абонента">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Name="tbSubscriberNomer" Text="Номер: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="tbSurname" Text="Фамилия: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                    <TextBlock Name="tbName" Text="Имя: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                    <TextBlock Name="tbPatronymic" Text="Отчество: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2"/>
+                </Grid>
+                <TextBlock x:Name="tbPlace0fResidence" Text="Адрес прописки: " TextWrapping="Wrap"/>
+                <TextBlock x:Name="tbResidentialAddress" Text="Адрес проживания: " TextWrapping="Wrap"/>
+                <GroupBox Header="Паспортные данные" Margin="0, 10, 0, 10">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="tbSeria" Text="Серия: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                            <TextBlock Name="tbNomer" Text="Номер: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                            <TextBlock Name="tbDateOfIssue" Text="Дата выдачи: " HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock Name="tbIssuedBy" Text="Выдан: "/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Договор с абонентом" Margin="0, 10, 0, 10">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="tbContractNumber" Text="Номер: " HorizontalAlignment="Left" Grid.Column="0"/>
+                            <TextBlock Name="tbDateOfCinclusion" Text="Дата заключения: " HorizontalAlignment="Left" Grid.Column="1"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="tbTypeContract" Text="Тип договора: " HorizontalAlignment="Left" Grid.Column="0"/>
+                            <TextBlock Name="tbPersonalAccount" Text="ЛС: " HorizontalAlignment="Left" Grid.Column="1"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="tbTermibationDate" Text="Дата расторжения: " HorizontalAlignment="Left" Grid.Column="0"/>
+                            <TextBlock Name="tbReasonForTermination" Text="Причина расторжения: " HorizontalAlignment="Left" Grid.Column="1"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Подключенные услуги" Margin="0, 10, 0, 10">
+                    <TextBlock Name="listService"/>
+                </GroupBox>
+                <GroupBox Header="Оборудование" Margin="0, 10, 0, 10">
+                    <TextBlock Name="listEquipments" TextWrapping="Wrap"/>
+                </GroupBox>
+                <GroupBox Header="История обращения в техническую поддержку за 12 месяцев" Margin="0, 10, 0, 10">
+                    <TextBlock Name="listCRM" TextWrapping="Wrap"/>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Row="2">
+            <Button x:Name="btnBack" Content="Назад" Template="{StaticResource CTButonMainPage}" Style="{StaticResource BtnStyle}" HorizontalAlignment="Left" Width="100" Height="40" Click="btnBack_Click" Cursor="Hand"/>
+        </Grid>
+    </Grid>
+</Page>

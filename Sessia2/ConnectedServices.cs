@@ -17,6 +17,7 @@ namespace Sessia2
         public int ConnectedServiceID { get; set; }
         public int SubscribersID { get; set; }
         public int ServicesID { get; set; }
+        public Nullable<System.DateTime> ConnectionDate { get; set; }
     
         public virtual Contracts Contracts { get; set; }
         public virtual Services Services { get; set; }
