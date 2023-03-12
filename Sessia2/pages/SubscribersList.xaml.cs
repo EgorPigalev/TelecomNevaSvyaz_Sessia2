@@ -25,6 +25,7 @@ namespace Sessia2
         {
             InitializeComponent();
             dgSubscribers.ItemsSource = Base.baseDate.Subscribers.ToList();
+            cbActive.IsChecked = true;
         }
 
         private void dgSubscribers_MouseDoubleClick(object sender, MouseButtonEventArgs e)

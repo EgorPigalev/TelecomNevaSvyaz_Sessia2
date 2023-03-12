@@ -23,22 +23,22 @@
             </StackPanel>
             <StackPanel x:Name="spOpen" Grid.Column="0" Visibility="Collapsed">
                 <Image Source="/resources/Лого ТНС.jpg" Width="150" Margin="10"/>
-                <Label Name="lbSubscriber" Content="Абоненты" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbSubscriber_MouseDown"/>
-                <Label Name="lbEquipmentManagement" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label Name="lbSubscriber" Content="Абоненты" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbSubscriber_MouseDown" Cursor="Hand"/>
+                <Label Name="lbEquipmentManagement" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand">
                     <StackPanel>
                         <TextBlock Text="Управление" HorizontalAlignment="Center"/>
                         <TextBlock Text="оборудованием" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Label>
-                <Label Name="lbAssets" Content="Активы" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <Label Name="lbBilling" Content="Биллинг" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <Label Name="lbUserSupport" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label Name="lbAssets" Content="Активы" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand"/>
+                <Label Name="lbBilling" Content="Биллинг" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand"/>
+                <Label Name="lbUserSupport" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Cursor="Hand">
                     <StackPanel>
                         <TextBlock Text="Поддержка" HorizontalAlignment="Center"/>
                         <TextBlock Text="пользователей" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Label>
-                <Label Name="lbCRM" Content="CRM" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbCRM_MouseDown"/>
+                <Label Name="lbCRM" Content="CRM" Background="LightGray" Margin="5" Padding="5" Height="60" Width="160" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDown="lbCRM_MouseDown" Cursor="Hand"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
                 <Button Content="проф." FontSize="18" Margin="5" Template="{StaticResource CTButon}" HorizontalAlignment="Center" Width="60" Height="60"/>
@@ -54,11 +54,11 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="500"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Name="tbHeader" VerticalAlignment="Center" FontSize="36" Margin="20"/>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ComboBox Name="cbFIOEmployee" Width="320" VerticalAlignment="Center" SelectionChanged="cbFIOEmployee_SelectionChanged"/>
+                    <ComboBox Name="cbFIOEmployee" Width="420" VerticalAlignment="Center" SelectionChanged="cbFIOEmployee_SelectionChanged"/>
                     <Rectangle RadiusX="100" RadiusY="100" Height="60" Width="60" Margin="5, 0, 0, 0">
                         <Rectangle.Fill>
                             <ImageBrush x:Name="imUser" Stretch="UniformToFill"/>

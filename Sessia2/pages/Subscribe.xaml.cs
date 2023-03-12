@@ -117,7 +117,7 @@ namespace Sessia2
                     listCRM.Text = listCRM.Text + "Дата создания: " + cRMs[i].DateCreation.ToString("d") + "\n";
                     if (cRMs[i].ClosingDate != null)
                     {
-                        listCRM.Text = listCRM.Text + "Дата закрытия: " + cRMs[i].ClosingDate.ToString("d") + "\n";
+                        listCRM.Text = listCRM.Text + "Дата закрытия: " + Convert.ToDateTime(cRMs[i].ClosingDate).ToString("d") + "\n";
                     }
                     listCRM.Text = listCRM.Text + "Услуга: " + cRMs[i].Services.Services1 + "\n";
                     listCRM.Text = listCRM.Text + "Вид услуги: " + cRMs[i].TypeOfServices.TypeOfService + "\n";

@@ -99,7 +99,7 @@
           </Key>
           <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="EventDate" Type="date" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Gender">
@@ -851,7 +851,7 @@
           </Key>
           <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="CRM18Model.FK_Events_Roles" FromRole="Events" ToRole="Roles" />
         </EntityType>

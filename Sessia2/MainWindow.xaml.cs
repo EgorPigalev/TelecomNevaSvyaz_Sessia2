@@ -26,10 +26,12 @@ namespace Sessia2
             Base.baseDate = new BaseDate();
             FrameClass.frame = mainFrame;
             FrameClass.frame.Navigate(new SubscribersList());
+            tbHeader.Text = "Абоненты ТНС";
             cbFIOEmployee.ItemsSource = Base.baseDate.Employees.ToList();
             cbFIOEmployee.SelectedValuePath = "EmployeesID";
             cbFIOEmployee.DisplayMemberPath = "FIO";
             cbFIOEmployee.SelectedIndex = 0;
+
         }
 
         private void cbFIOEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -38,7 +40,8 @@ namespace Sessia2
             imUser.ImageSource = new BitmapImage(new Uri("" + employee.Image, UriKind.Relative));
             if (employee != null) // Изменение списка событий
             {
-                lvEvents.ItemsSource = Base.baseDate.Events.Where(x => x.RoleID == employee.RoleID).ToList();
+                List<Events> events = Base.baseDate.Events.Where(x => x.RoleID == employee.RoleID).ToList();
+                lvEvents.ItemsSource = events.OrderBy(x => x.EventDate);
             }
             List<AvailableModules> availableModules = Base.baseDate.AvailableModules.Where(x => x.RoleID == employee.RoleID).ToList(); // Изменение доступных модулей
             imSubscriber.Visibility = Visibility.Collapsed;             // Скрытие всех элементов

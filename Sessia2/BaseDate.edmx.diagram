@@ -6,28 +6,28 @@
     <edmx:Diagrams>
       <Diagram DiagramId="836fe35908b14eeaa03d8c58000cb8b2" Name="Diagram1">
         <EntityTypeShape EntityType="CRM18Model.AvailableModules" Width="1.5" PointX="8" PointY="8.5" />
-        <EntityTypeShape EntityType="CRM18Model.BuildingTypes" Width="1.5" PointX="1.5" PointY="29.25" />
+        <EntityTypeShape EntityType="CRM18Model.BuildingTypes" Width="1.5" PointX="1.5" PointY="24.625" />
         <EntityTypeShape EntityType="CRM18Model.ConnectedServices" Width="1.5" PointX="6" PointY="3.75" />
         <EntityTypeShape EntityType="CRM18Model.Contracts" Width="1.5" PointX="3.75" PointY="12" />
         <EntityTypeShape EntityType="CRM18Model.CRM" Width="1.5" PointX="3" PointY="2.625" />
         <EntityTypeShape EntityType="CRM18Model.Employees" Width="1.5" PointX="8" PointY="14.125" />
-        <EntityTypeShape EntityType="CRM18Model.EquipmentInstallations" Width="1.5" PointX="10.25" PointY="14.375" />
+        <EntityTypeShape EntityType="CRM18Model.EquipmentInstallations" Width="1.5" PointX="10.25" PointY="11.375" />
         <EntityTypeShape EntityType="CRM18Model.Equipments" Width="1.5" PointX="8" PointY="18.625" />
         <EntityTypeShape EntityType="CRM18Model.Events" Width="1.5" PointX="8" PointY="11.375" />
-        <EntityTypeShape EntityType="CRM18Model.Gender" Width="1.5" PointX="1.5" PointY="19.5" />
+        <EntityTypeShape EntityType="CRM18Model.Gender" Width="1.5" PointX="1.5" PointY="14.75" />
         <EntityTypeShape EntityType="CRM18Model.Modules" Width="1.5" PointX="5.75" PointY="7.625" />
         <EntityTypeShape EntityType="CRM18Model.ProblemTypes" Width="1.5" PointX="0.75" PointY="37.125" />
-        <EntityTypeShape EntityType="CRM18Model.Raions" Width="1.5" PointX="1.5" PointY="25.75" />
-        <EntityTypeShape EntityType="CRM18Model.ReasonForTerminations" Width="1.5" PointX="1.5" PointY="11" />
-        <EntityTypeShape EntityType="CRM18Model.ResidentialAddress" Width="1.5" PointX="1.5" PointY="21.875" />
+        <EntityTypeShape EntityType="CRM18Model.Raions" Width="1.5" PointX="1.5" PointY="21.125" />
+        <EntityTypeShape EntityType="CRM18Model.ReasonForTerminations" Width="1.5" PointX="1.5" PointY="27.5" />
+        <EntityTypeShape EntityType="CRM18Model.ResidentialAddress" Width="1.5" PointX="1.5" PointY="17.25" />
         <EntityTypeShape EntityType="CRM18Model.Roles" Width="1.5" PointX="5.75" PointY="10.5" />
         <EntityTypeShape EntityType="CRM18Model.Services" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="CRM18Model.ServiceStatus" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="CRM18Model.ServiceTypes" Width="1.5" PointX="0.75" PointY="32.5" />
-        <EntityTypeShape EntityType="CRM18Model.Subscribers" Width="1.5" PointX="1.5" PointY="13.375" />
-        <EntityTypeShape EntityType="CRM18Model.TypeContracts" Width="1.5" PointX="1.5" PointY="8.625" />
-        <EntityTypeShape EntityType="CRM18Model.TypeEquioment" Width="1.5" PointX="5.75" PointY="19.125" />
-        <EntityTypeShape EntityType="CRM18Model.TypeOfServices" Width="1.5" PointX="0.75" PointY="34.875" />
+        <EntityTypeShape EntityType="CRM18Model.ServiceStatus" Width="1.5" PointX="0.75" PointY="32.5" />
+        <EntityTypeShape EntityType="CRM18Model.ServiceTypes" Width="1.5" PointX="0.75" PointY="34.875" />
+        <EntityTypeShape EntityType="CRM18Model.Subscribers" Width="1.5" PointX="1.5" PointY="8.625" />
+        <EntityTypeShape EntityType="CRM18Model.TypeContracts" Width="1.5" PointX="1.5" PointY="29.875" />
+        <EntityTypeShape EntityType="CRM18Model.TypeEquioment" Width="1.5" PointX="5.75" PointY="19" />
+        <EntityTypeShape EntityType="CRM18Model.TypeOfServices" Width="1.5" PointX="0.75" PointY="1.125" />
         <AssociationConnector Association="CRM18Model.FK_AvailableModules_Modeles" />
         <AssociationConnector Association="CRM18Model.FK_AvailableModules_Roles" />
         <AssociationConnector Association="CRM18Model.FK_Raions_BuildingTypes" />
