@@ -23,23 +23,23 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10">
                 <TextBlock Text="Фамилия" HorizontalAlignment="Center"/>
-                <TextBox x:Name="tbSearchSurname"/>
+                <TextBox x:Name="tbSearchSurname" SelectionChanged="tbSearchSurname_SelectionChanged"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
                 <TextBlock Text="Район" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="tbFilterRaion"/>
+                <ComboBox x:Name="cbFilterRaion" SelectionChanged="cbFilterRaion_SelectionChanged"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="2" Margin="10">
                 <TextBlock Text="Улица" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="tbFilterStreet"/>
+                <ComboBox x:Name="cbFilterStreet"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="3" Margin="10">
                 <TextBlock Text="Номер дома" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="tbFiltNomerHouse"/>
+                <ComboBox x:Name="cbFiltNomerHouse"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="4" Margin="10">
                 <TextBlock Text="Лицевой счет" HorizontalAlignment="Center"/>
-                <TextBox x:Name="tbSearchPersonalAccount"/>
+                <TextBox x:Name="tbSearchPersonalAccount" SelectionChanged="tbSearchSurname_SelectionChanged"/>
             </StackPanel>
         </Grid>
         <DataGrid Name="dgSubscribers" Grid.Row="1" Margin="10" FontSize="18" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="dgSubscribers_MouseDoubleClick">
@@ -56,8 +56,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <CheckBox Name="cbActive" Content="Активные" Grid.Column="0" VerticalAlignment="Center"/>
-            <CheckBox Name="cbNotActive" Content="Неактивные" Grid.Column="1" VerticalAlignment="Center"/>
+            <CheckBox Name="cbActive" Content="Активные" Grid.Column="0" VerticalAlignment="Center" Click="cbActive_Click"/>
+            <CheckBox Name="cbNotActive" Content="Неактивные" Grid.Column="1" VerticalAlignment="Center" Click="cbActive_Click"/>
         </Grid>
     </Grid>
 </Page>

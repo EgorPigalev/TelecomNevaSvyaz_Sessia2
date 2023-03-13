@@ -27,7 +27,7 @@ namespace Sessia2
             FrameClass.frame = mainFrame;
             FrameClass.frame.Navigate(new SubscribersList());
             tbHeader.Text = "Абоненты ТНС";
-            cbFIOEmployee.ItemsSource = Base.baseDate.Employees.ToList();
+            cbFIOEmployee.ItemsSource = Base.baseDate.Employees.ToList(); // Заполнение списка сотрудников
             cbFIOEmployee.SelectedValuePath = "EmployeesID";
             cbFIOEmployee.DisplayMemberPath = "FIO";
             cbFIOEmployee.SelectedIndex = 0;
@@ -37,14 +37,14 @@ namespace Sessia2
         private void cbFIOEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.EmployeeID == cbFIOEmployee.SelectedIndex + 1);
-            imUser.ImageSource = new BitmapImage(new Uri("" + employee.Image, UriKind.Relative));
+            imUser.ImageSource = new BitmapImage(new Uri("" + employee.Image, UriKind.Relative)); // Формирование аватарки сотрудника
             if (employee != null) // Изменение списка событий
             {
                 List<Events> events = Base.baseDate.Events.Where(x => x.RoleID == employee.RoleID).ToList();
                 lvEvents.ItemsSource = events.OrderBy(x => x.EventDate);
             }
             List<AvailableModules> availableModules = Base.baseDate.AvailableModules.Where(x => x.RoleID == employee.RoleID).ToList(); // Изменение доступных модулей
-            imSubscriber.Visibility = Visibility.Collapsed;             // Скрытие всех элементов
+            imSubscriber.Visibility = Visibility.Collapsed; // Скрытие всех элементов
             imEquipmentManagement.Visibility = Visibility.Collapsed;
             imAssets.Visibility = Visibility.Collapsed;
             imBilling.Visibility = Visibility.Collapsed;
@@ -87,7 +87,11 @@ namespace Sessia2
                 }
             }
         }
-
+        /// <summary>
+        /// Получение текущего состояния прокрутки listView списка событий
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
         public static DependencyObject GetScrollViewer(DependencyObject o)
         {
             if (o is ScrollViewer)
@@ -113,7 +117,6 @@ namespace Sessia2
         private void btnUp_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var scrollViwer = GetScrollViewer(lvEvents) as ScrollViewer;
-
             if (scrollViwer != null)
             {
                 scrollViwer.ScrollToVerticalOffset(scrollViwer.VerticalOffset - 1);
@@ -123,7 +126,6 @@ namespace Sessia2
         private void btnDown_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var scrollViwer = GetScrollViewer(lvEvents) as ScrollViewer;
-
             if (scrollViwer != null)
             {
                 scrollViwer.ScrollToVerticalOffset(scrollViwer.VerticalOffset + 1);

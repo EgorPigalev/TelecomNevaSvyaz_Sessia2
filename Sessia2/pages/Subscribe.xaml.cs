@@ -29,16 +29,13 @@ namespace Sessia2
             tbPatronymic.Text = tbPatronymic.Text + subscriber.Patronymic;
             tbPlace0fResidence.Text = tbPlace0fResidence.Text + subscriber.Place0fResidence;
             tbResidentialAddress.Text = tbResidentialAddress.Text + subscriber.ResidentialAddress.Raions.RaionName + " " + subscriber.ResidentialAddress.Prefix + " " + subscriber.ResidentialAddress.House;
-
-            tbSeria.Text = tbSeria.Text + subscriber.Seria;
+            tbSeria.Text = tbSeria.Text + subscriber.Seria; // Формирование паспортных данных
             tbNomer.Text = tbNomer.Text + subscriber.Nomer;
             tbDateOfIssue.Text = tbDateOfIssue.Text + subscriber.DateOfIssue.ToString("d");
             tbIssuedBy.Text = tbIssuedBy.Text + subscriber.IssuedBy;
-
-            tbContractNumber.Text = tbContractNumber.Text + subscriber.Contracts.ContractNumber;
+            tbContractNumber.Text = tbContractNumber.Text + subscriber.Contracts.ContractNumber; // Формирование данных о договоре абонента
             tbDateOfCinclusion.Text = tbDateOfCinclusion.Text + subscriber.Contracts.DateOfCinclusion.ToString("d");
             tbTypeContract.Text = tbTypeContract.Text + subscriber.Contracts.TypeContracts.TypeContract;
-
             tbPersonalAccount.Text = tbPersonalAccount.Text + subscriber.Contracts.PersonalAccount;
             if(subscriber.Contracts.TermibationDate != null) // Если договор расторгнут
             {
@@ -52,13 +49,12 @@ namespace Sessia2
                 tbReasonForTermination.Text = "";
                 tbReasonForTermination.Visibility = Visibility.Collapsed;
             }
-
             List<ConnectedServices> connectedServices = Base.baseDate.ConnectedServices.Where(x => x.SubscribersID == subscriber.SubscriberID).ToList(); // Формирование списка подключенных услуг с датой подключения
             for(int i = 0; i < connectedServices.Count; i++)
             {
                 if(i == connectedServices.Count - 1) // Если последний эллемент, то на новую строку не переходим
                 {
-                    if (connectedServices[i].ConnectionDate != null)
+                    if (connectedServices[i].ConnectionDate != null) // Если указана дата подключения
                     {
                         listService.Text = listService.Text + connectedServices[i].Services.Services1 + " Дата подключения: " + Convert.ToDateTime(connectedServices[i].ConnectionDate).ToString("d");
                     }
@@ -69,7 +65,7 @@ namespace Sessia2
                 }
                 else
                 {
-                    if (connectedServices[i].ConnectionDate != null)
+                    if (connectedServices[i].ConnectionDate != null) // Если указана дата подключения
                     {
                         listService.Text = listService.Text + connectedServices[i].Services.Services1 + " Дата подключения: " + Convert.ToDateTime(connectedServices[i].ConnectionDate).ToString("d") + "\n";
                     }
@@ -79,9 +75,8 @@ namespace Sessia2
                     }
                 }
             }
-
             List<EquipmentInstallations> equipmentInstallations = Base.baseDate.EquipmentInstallations.Where(x => x.SubscriberID == subscriber.SubscriberID).ToList();
-            for(int i = 0; i < equipmentInstallations.Count; i++)
+            for(int i = 0; i < equipmentInstallations.Count; i++) // Формирование списка установленного оборудования
             {
                 if (i == connectedServices.Count - 1) // Если последний эллемент, то на новую строку не переходим
                 {
@@ -106,12 +101,11 @@ namespace Sessia2
                     }
                 }
             }
-
             DateTime dateTime = DateTime.Now.AddMonths(-12); // Дата год назад
             List<CRM> cRMs = Base.baseDate.CRM.Where(x => x.SubscriberID == subscriber.SubscriberID && x.DateCreation >= dateTime).ToList();
-            for(int i = 0; i < cRMs.Count; i++)
+            for(int i = 0; i < cRMs.Count; i++) // Формирование списка оказанных услуг за год
             {
-                if (i == cRMs.Count - 1)
+                if (i == cRMs.Count - 1) // Если последний элемент, то пробелы в конце не ставим
                 {
                     listCRM.Text = listCRM.Text + "Номер заявки " + cRMs[i].NumberCRM + "\n";
                     listCRM.Text = listCRM.Text + "Дата создания: " + cRMs[i].DateCreation.ToString("d") + "\n";
