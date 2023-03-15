@@ -23,7 +23,13 @@ namespace Sessia2
         {
             InitializeComponent();
             Subscribers subscriber = Base.baseDate.Subscribers.FirstOrDefault(x => x.SubscriberID == subscriberID);
+            tbHeader.Text = tbHeader.Text + subscriber.FIO;
+            tbNomer.Text = tbNomer.Text + subscriber.Contracts.PersonalAccount + "/" + DateTime.Now.ToString("dd") + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
+        }
 
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

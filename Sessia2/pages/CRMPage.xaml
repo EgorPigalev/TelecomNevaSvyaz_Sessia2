@@ -31,6 +31,6 @@
             <TextBlock Text="Пользователь: "/>
             <ComboBox Name="cmbSubscriber" MinWidth="400"/>
         </StackPanel>
-        <Button x:Name="btnAddCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center" Grid.Row="2" Click="btnAddCRM_Click"/>
+        <Button x:Name="btnAddCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center" Grid.Row="2" Click="btnAddCRM_Click" Cursor="Hand"/>
     </Grid>
 </Page>

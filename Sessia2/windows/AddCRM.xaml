@@ -4,9 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sessia2"
-        mc:Ignorable="d"
-        Title="AddCRM" Height="450" Width="800">
+        mc:Ignorable="d" Icon="/resources/image.ico" Style="{StaticResource WindowsMain}"
+        Title="ООО «Телеком Нева Связь»" Height="600" Width="1000" MinHeight="600" MinWidth="1000">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="tbHeader" Text="Создание заявки для абонента " HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="1" Margin="10">
+            <TextBlock x:Name="tbNomer" Text="Номер заявки: "/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Button x:Name="btnBack" Content="Назад" Height="50" Width="200" Margin="20, 0, 0, 0" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Left" Click="btnBack_Click"/>
+            <Button x:Name="btnCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>
