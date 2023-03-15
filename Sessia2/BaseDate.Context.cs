@@ -27,6 +27,7 @@ namespace Sessia2
     
         public virtual DbSet<AvailableModules> AvailableModules { get; set; }
         public virtual DbSet<BuildingTypes> BuildingTypes { get; set; }
+        public virtual DbSet<Citys> Citys { get; set; }
         public virtual DbSet<ConnectedServices> ConnectedServices { get; set; }
         public virtual DbSet<Contracts> Contracts { get; set; }
         public virtual DbSet<CRM> CRM { get; set; }
@@ -44,6 +45,7 @@ namespace Sessia2
         public virtual DbSet<Services> Services { get; set; }
         public virtual DbSet<ServiceStatus> ServiceStatus { get; set; }
         public virtual DbSet<ServiceTypes> ServiceTypes { get; set; }
+        public virtual DbSet<Streets> Streets { get; set; }
         public virtual DbSet<Subscribers> Subscribers { get; set; }
         public virtual DbSet<TypeContracts> TypeContracts { get; set; }
         public virtual DbSet<TypeEquioment> TypeEquioment { get; set; }

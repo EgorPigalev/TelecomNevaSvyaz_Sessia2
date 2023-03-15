@@ -31,7 +31,6 @@ namespace Sessia2
             cbFIOEmployee.SelectedValuePath = "EmployeesID";
             cbFIOEmployee.DisplayMemberPath = "FIO";
             cbFIOEmployee.SelectedIndex = 0;
-
         }
 
         private void cbFIOEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -31,15 +31,15 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="2" Margin="10">
                 <TextBlock Text="Улица" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="cbFilterStreet"/>
+                <ComboBox x:Name="cbFilterStreet" SelectionChanged="cbFilterStreet_SelectionChanged"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="3" Margin="10">
                 <TextBlock Text="Номер дома" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="cbFiltNomerHouse"/>
+                <ComboBox x:Name="cbFiltNomerHouse" SelectionChanged="cbFiltNomerHouse_SelectionChanged"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="4" Margin="10">
                 <TextBlock Text="Лицевой счет" HorizontalAlignment="Center"/>
-                <TextBox x:Name="tbSearchPersonalAccount" SelectionChanged="tbSearchSurname_SelectionChanged"/>
+                <TextBox x:Name="tbSearchPersonalAccount" SelectionChanged="tbSearchSurname_SelectionChanged" TextInput="tbSearchPersonalAccount_TextInput"/>
             </StackPanel>
         </Grid>
         <DataGrid Name="dgSubscribers" Grid.Row="1" Margin="10" FontSize="18" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="dgSubscribers_MouseDoubleClick">

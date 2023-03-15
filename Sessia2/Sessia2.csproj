@@ -70,6 +70,9 @@
     <Compile Include="BuildingTypes.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Citys.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
     <Compile Include="classes\Base.cs" />
     <Compile Include="BaseDate.cs">
       <AutoGen>True</AutoGen>
@@ -135,6 +138,9 @@
     </Compile>
     <Compile Include="pages\Subscribe.xaml.cs">
       <DependentUpon>Subscribe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Streets.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
     <Compile Include="Subscribers.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>

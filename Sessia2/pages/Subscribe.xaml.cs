@@ -28,7 +28,7 @@ namespace Sessia2
             tbName.Text = tbName.Text + subscriber.Name;
             tbPatronymic.Text = tbPatronymic.Text + subscriber.Patronymic;
             tbPlace0fResidence.Text = tbPlace0fResidence.Text + subscriber.Place0fResidence;
-            tbResidentialAddress.Text = tbResidentialAddress.Text + subscriber.ResidentialAddress.Raions.RaionName + " " + subscriber.ResidentialAddress.Prefix + " " + subscriber.ResidentialAddress.House;
+            tbResidentialAddress.Text = tbResidentialAddress.Text + subscriber.ResidentialAddress.Raions.RaionName + ", " + subscriber.ResidentialAddress.Citys.City + " " + subscriber.ResidentialAddress.Streets.Street + " " + subscriber.ResidentialAddress.House;
             tbSeria.Text = tbSeria.Text + subscriber.Seria; // Формирование паспортных данных
             tbNomer.Text = tbNomer.Text + subscriber.Nomer;
             tbDateOfIssue.Text = tbDateOfIssue.Text + subscriber.DateOfIssue.ToString("d");

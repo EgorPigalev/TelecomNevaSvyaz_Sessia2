@@ -20,6 +20,13 @@
           <Property Name="BuildingTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BuildingType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Citys">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="ConnectedServices">
           <Key>
             <PropertyRef Name="ConnectedServiceID" />
@@ -148,7 +155,8 @@
           <Property Name="ResidentialAddressID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PrefixCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RaionID" Type="int" Nullable="false" />
-          <Property Name="Prefix" Type="nvarchar" MaxLength="100" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="StreetID" Type="int" />
           <Property Name="House" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
@@ -178,6 +186,13 @@
           </Key>
           <Property Name="ServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServiceType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="StreetID" />
+          </Key>
+          <Property Name="StreetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Subscribers">
           <Key>
@@ -461,6 +476,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ResidentialAddress_Citys">
+          <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+          <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citys">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="ResidentialAddress">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ResidentialAddress_Raions">
           <End Role="Raions" Type="Self.Raions" Multiplicity="1" />
           <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="*" />
@@ -470,6 +497,18 @@
             </Principal>
             <Dependent Role="ResidentialAddress">
               <PropertyRef Name="RaionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentialAddress_Streets">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="0..1" />
+          <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="ResidentialAddress">
+              <PropertyRef Name="StreetID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -497,9 +536,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Subscribers_ResidentialAddress1">
+          <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentialAddress">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище CRM18ModelContainer">
           <EntitySet Name="AvailableModules" EntityType="Self.AvailableModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BuildingTypes" EntityType="Self.BuildingTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConnectedServices" EntityType="Self.ConnectedServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CRM" EntityType="Self.CRM" Schema="dbo" store:Type="Tables" />
@@ -517,6 +569,7 @@
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceStatus" EntityType="Self.ServiceStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Streets" EntityType="Self.Streets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscribers" EntityType="Self.Subscribers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeContracts" EntityType="Self.TypeContracts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeEquioment" EntityType="Self.TypeEquioment" Schema="dbo" store:Type="Tables" />
@@ -601,8 +654,16 @@
             <End Role="BuildingTypes" EntitySet="BuildingTypes" />
             <End Role="Raions" EntitySet="Raions" />
           </AssociationSet>
+          <AssociationSet Name="FK_ResidentialAddress_Citys" Association="Self.FK_ResidentialAddress_Citys">
+            <End Role="Citys" EntitySet="Citys" />
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+          </AssociationSet>
           <AssociationSet Name="FK_ResidentialAddress_Raions" Association="Self.FK_ResidentialAddress_Raions">
             <End Role="Raions" EntitySet="Raions" />
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentialAddress_Streets" Association="Self.FK_ResidentialAddress_Streets">
+            <End Role="Streets" EntitySet="Streets" />
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_Subscribers_Gender" Association="Self.FK_Subscribers_Gender">
@@ -610,6 +671,10 @@
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
           <AssociationSet Name="FK_Subscribers_ResidentialAddress" Association="Self.FK_Subscribers_ResidentialAddress">
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_ResidentialAddress1" Association="Self.FK_Subscribers_ResidentialAddress1">
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
@@ -621,6 +686,7 @@
         <EntityContainer Name="BaseDate" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AvailableModules" EntityType="CRM18Model.AvailableModules" />
           <EntitySet Name="BuildingTypes" EntityType="CRM18Model.BuildingTypes" />
+          <EntitySet Name="Citys" EntityType="CRM18Model.Citys" />
           <EntitySet Name="ConnectedServices" EntityType="CRM18Model.ConnectedServices" />
           <EntitySet Name="Contracts" EntityType="CRM18Model.Contracts" />
           <EntitySet Name="CRM" EntityType="CRM18Model.CRM" />
@@ -638,6 +704,7 @@
           <EntitySet Name="Services" EntityType="CRM18Model.Services" />
           <EntitySet Name="ServiceStatus" EntityType="CRM18Model.ServiceStatus" />
           <EntitySet Name="ServiceTypes" EntityType="CRM18Model.ServiceTypes" />
+          <EntitySet Name="Streets" EntityType="CRM18Model.Streets" />
           <EntitySet Name="Subscribers" EntityType="CRM18Model.Subscribers" />
           <EntitySet Name="TypeContracts" EntityType="CRM18Model.TypeContracts" />
           <EntitySet Name="TypeEquioment" EntityType="CRM18Model.TypeEquioment" />
@@ -653,6 +720,10 @@
           <AssociationSet Name="FK_Raions_BuildingTypes" Association="CRM18Model.FK_Raions_BuildingTypes">
             <End Role="BuildingTypes" EntitySet="BuildingTypes" />
             <End Role="Raions" EntitySet="Raions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentialAddress_Citys" Association="CRM18Model.FK_ResidentialAddress_Citys">
+            <End Role="Citys" EntitySet="Citys" />
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_ConnectedServices_Contracts" Association="CRM18Model.FK_ConnectedServices_Contracts">
             <End Role="Contracts" EntitySet="Contracts" />
@@ -730,7 +801,15 @@
             <End Role="Raions" EntitySet="Raions" />
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
           </AssociationSet>
+          <AssociationSet Name="FK_ResidentialAddress_Streets" Association="CRM18Model.FK_ResidentialAddress_Streets">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+          </AssociationSet>
           <AssociationSet Name="FK_Subscribers_ResidentialAddress" Association="CRM18Model.FK_Subscribers_ResidentialAddress">
+            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_ResidentialAddress1" Association="CRM18Model.FK_Subscribers_ResidentialAddress1">
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
@@ -752,6 +831,14 @@
           <Property Name="BuildingTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BuildingType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Raions" Relationship="CRM18Model.FK_Raions_BuildingTypes" FromRole="BuildingTypes" ToRole="Raions" />
+        </EntityType>
+        <EntityType Name="Citys">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResidentialAddress" Relationship="CRM18Model.FK_ResidentialAddress_Citys" FromRole="Citys" ToRole="ResidentialAddress" />
         </EntityType>
         <EntityType Name="ConnectedServices">
           <Key>
@@ -907,10 +994,14 @@
           <Property Name="ResidentialAddressID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrefixCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RaionID" Type="Int32" Nullable="false" />
-          <Property Name="Prefix" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="StreetID" Type="Int32" />
           <Property Name="House" Type="Int32" />
+          <NavigationProperty Name="Citys" Relationship="CRM18Model.FK_ResidentialAddress_Citys" FromRole="ResidentialAddress" ToRole="Citys" />
           <NavigationProperty Name="Raions" Relationship="CRM18Model.FK_ResidentialAddress_Raions" FromRole="ResidentialAddress" ToRole="Raions" />
+          <NavigationProperty Name="Streets" Relationship="CRM18Model.FK_ResidentialAddress_Streets" FromRole="ResidentialAddress" ToRole="Streets" />
           <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="ResidentialAddress" ToRole="Subscribers" />
+          <NavigationProperty Name="Subscribers1" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress1" FromRole="ResidentialAddress" ToRole="Subscribers" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -947,6 +1038,14 @@
           <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_ServiceTypes" FromRole="ServiceTypes" ToRole="CRM" />
         </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="StreetID" />
+          </Key>
+          <Property Name="StreetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResidentialAddress" Relationship="CRM18Model.FK_ResidentialAddress_Streets" FromRole="Streets" ToRole="ResidentialAddress" />
+        </EntityType>
         <EntityType Name="Subscribers">
           <Key>
             <PropertyRef Name="SubscriberID" />
@@ -972,6 +1071,7 @@
           <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Subscribers" FromRole="Subscribers" ToRole="EquipmentInstallations" />
           <NavigationProperty Name="Gender" Relationship="CRM18Model.FK_Subscribers_Gender" FromRole="Subscribers" ToRole="Gender" />
           <NavigationProperty Name="ResidentialAddress" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="Subscribers" ToRole="ResidentialAddress" />
+          <NavigationProperty Name="ResidentialAddress1" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress1" FromRole="Subscribers" ToRole="ResidentialAddress" />
         </EntityType>
         <EntityType Name="TypeContracts">
           <Key>
@@ -1030,6 +1130,18 @@
             </Principal>
             <Dependent Role="Raions">
               <PropertyRef Name="BuildingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentialAddress_Citys">
+          <End Type="CRM18Model.Citys" Role="Citys" Multiplicity="1" />
+          <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citys">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="ResidentialAddress">
+              <PropertyRef Name="CityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1261,7 +1373,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ResidentialAddress_Streets">
+          <End Type="CRM18Model.Streets" Role="Streets" Multiplicity="0..1" />
+          <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="StreetID" />
+            </Principal>
+            <Dependent Role="ResidentialAddress">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Subscribers_ResidentialAddress">
+          <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="1" />
+          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentialAddress">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="ResidentialAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_ResidentialAddress1">
           <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="1" />
           <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1293,6 +1429,14 @@
               <MappingFragment StoreEntitySet="BuildingTypes">
                 <ScalarProperty Name="BuildingType" ColumnName="BuildingType" />
                 <ScalarProperty Name="BuildingTypeID" ColumnName="BuildingTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citys">
+            <EntityTypeMapping TypeName="CRM18Model.Citys">
+              <MappingFragment StoreEntitySet="Citys">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1433,7 +1577,8 @@
             <EntityTypeMapping TypeName="CRM18Model.ResidentialAddress">
               <MappingFragment StoreEntitySet="ResidentialAddress">
                 <ScalarProperty Name="House" ColumnName="House" />
-                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
                 <ScalarProperty Name="RaionID" ColumnName="RaionID" />
                 <ScalarProperty Name="PrefixCode" ColumnName="PrefixCode" />
                 <ScalarProperty Name="ResidentialAddressID" ColumnName="ResidentialAddressID" />
@@ -1469,6 +1614,14 @@
               <MappingFragment StoreEntitySet="ServiceTypes">
                 <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Streets">
+            <EntityTypeMapping TypeName="CRM18Model.Streets">
+              <MappingFragment StoreEntitySet="Streets">
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
