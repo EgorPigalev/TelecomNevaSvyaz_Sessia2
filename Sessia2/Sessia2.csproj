@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="KindsAndTypesService.cs">
+      <DependentUpon>BaseDate.tt</DependentUpon>
+    </Compile>
     <Compile Include="windows\AddCRM.xaml.cs">
       <DependentUpon>AddCRM.xaml</DependentUpon>
     </Compile>

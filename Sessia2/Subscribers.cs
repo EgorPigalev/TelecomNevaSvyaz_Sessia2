@@ -45,6 +45,5 @@ namespace Sessia2
         public virtual ICollection<EquipmentInstallations> EquipmentInstallations { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual ResidentialAddress ResidentialAddress { get; set; }
-        public virtual ResidentialAddress ResidentialAddress1 { get; set; }
     }
 }

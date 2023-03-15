@@ -18,7 +18,6 @@ namespace Sessia2
         public ResidentialAddress()
         {
             this.Subscribers = new HashSet<Subscribers>();
-            this.Subscribers1 = new HashSet<Subscribers>();
         }
     
         public string ResidentialAddressID { get; set; }
@@ -33,7 +32,5 @@ namespace Sessia2
         public virtual Streets Streets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subscribers> Subscribers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subscribers> Subscribers1 { get; set; }
     }
 }

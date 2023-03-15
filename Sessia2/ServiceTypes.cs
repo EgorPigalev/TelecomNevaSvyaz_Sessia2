@@ -18,6 +18,7 @@ namespace Sessia2
         public ServiceTypes()
         {
             this.CRM = new HashSet<CRM>();
+            this.KindsAndTypesService = new HashSet<KindsAndTypesService>();
         }
     
         public int ServiceTypeID { get; set; }
@@ -25,5 +26,7 @@ namespace Sessia2
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRM> CRM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KindsAndTypesService> KindsAndTypesService { get; set; }
     }
 }

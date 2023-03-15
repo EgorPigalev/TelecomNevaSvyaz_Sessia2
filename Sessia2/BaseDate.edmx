@@ -53,7 +53,7 @@
             <PropertyRef Name="CRMID" />
           </Key>
           <Property Name="CRMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NumberCRM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberCRM" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DateCreation" Type="date" Nullable="false" />
           <Property Name="SubscriberID" Type="int" Nullable="false" />
           <Property Name="ServicesID" Type="int" Nullable="false" />
@@ -61,7 +61,7 @@
           <Property Name="ServiceTypeID" Type="int" Nullable="false" />
           <Property Name="ServiceStatusID" Type="int" Nullable="false" />
           <Property Name="ProblemTypeID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="400" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ClosingDate" Type="date" />
         </EntityType>
         <EntityType Name="Employees">
@@ -115,6 +115,14 @@
           </Key>
           <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KindsAndTypesService">
+          <Key>
+            <PropertyRef Name="KindsAndTypesServiceID" />
+          </Key>
+          <Property Name="KindsAndTypesServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeOfServiceID" Type="int" Nullable="false" />
+          <Property Name="ServiceType" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Modules">
           <Key>
@@ -464,6 +472,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KindsAndTypesService_ServiceTypes">
+          <End Role="ServiceTypes" Type="Self.ServiceTypes" Multiplicity="1" />
+          <End Role="KindsAndTypesService" Type="Self.KindsAndTypesService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTypes">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="KindsAndTypesService">
+              <PropertyRef Name="ServiceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KindsAndTypesService_TypeOfServices">
+          <End Role="TypeOfServices" Type="Self.TypeOfServices" Multiplicity="1" />
+          <End Role="KindsAndTypesService" Type="Self.KindsAndTypesService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfServices">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Principal>
+            <Dependent Role="KindsAndTypesService">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Raions_BuildingTypes">
           <End Role="BuildingTypes" Type="Self.BuildingTypes" Multiplicity="1" />
           <End Role="Raions" Type="Self.Raions" Multiplicity="*" />
@@ -536,18 +568,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Subscribers_ResidentialAddress1">
-          <End Role="ResidentialAddress" Type="Self.ResidentialAddress" Multiplicity="1" />
-          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ResidentialAddress">
-              <PropertyRef Name="ResidentialAddressID" />
-            </Principal>
-            <Dependent Role="Subscribers">
-              <PropertyRef Name="ResidentialAddressID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Хранилище CRM18ModelContainer">
           <EntitySet Name="AvailableModules" EntityType="Self.AvailableModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BuildingTypes" EntityType="Self.BuildingTypes" Schema="dbo" store:Type="Tables" />
@@ -560,6 +580,7 @@
           <EntitySet Name="Equipments" EntityType="Self.Equipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KindsAndTypesService" EntityType="Self.KindsAndTypesService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProblemTypes" EntityType="Self.ProblemTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Raions" EntityType="Self.Raions" Schema="dbo" store:Type="Tables" />
@@ -650,6 +671,14 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Events" EntitySet="Events" />
           </AssociationSet>
+          <AssociationSet Name="FK_KindsAndTypesService_ServiceTypes" Association="Self.FK_KindsAndTypesService_ServiceTypes">
+            <End Role="ServiceTypes" EntitySet="ServiceTypes" />
+            <End Role="KindsAndTypesService" EntitySet="KindsAndTypesService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KindsAndTypesService_TypeOfServices" Association="Self.FK_KindsAndTypesService_TypeOfServices">
+            <End Role="TypeOfServices" EntitySet="TypeOfServices" />
+            <End Role="KindsAndTypesService" EntitySet="KindsAndTypesService" />
+          </AssociationSet>
           <AssociationSet Name="FK_Raions_BuildingTypes" Association="Self.FK_Raions_BuildingTypes">
             <End Role="BuildingTypes" EntitySet="BuildingTypes" />
             <End Role="Raions" EntitySet="Raions" />
@@ -674,10 +703,6 @@
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Subscribers_ResidentialAddress1" Association="Self.FK_Subscribers_ResidentialAddress1">
-            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
-            <End Role="Subscribers" EntitySet="Subscribers" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -695,6 +720,7 @@
           <EntitySet Name="Equipments" EntityType="CRM18Model.Equipments" />
           <EntitySet Name="Events" EntityType="CRM18Model.Events" />
           <EntitySet Name="Gender" EntityType="CRM18Model.Gender" />
+          <EntitySet Name="KindsAndTypesService" EntityType="CRM18Model.KindsAndTypesService" />
           <EntitySet Name="Modules" EntityType="CRM18Model.Modules" />
           <EntitySet Name="ProblemTypes" EntityType="CRM18Model.ProblemTypes" />
           <EntitySet Name="Raions" EntityType="CRM18Model.Raions" />
@@ -797,6 +823,14 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
+          <AssociationSet Name="FK_KindsAndTypesService_ServiceTypes" Association="CRM18Model.FK_KindsAndTypesService_ServiceTypes">
+            <End Role="ServiceTypes" EntitySet="ServiceTypes" />
+            <End Role="KindsAndTypesService" EntitySet="KindsAndTypesService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KindsAndTypesService_TypeOfServices" Association="CRM18Model.FK_KindsAndTypesService_TypeOfServices">
+            <End Role="TypeOfServices" EntitySet="TypeOfServices" />
+            <End Role="KindsAndTypesService" EntitySet="KindsAndTypesService" />
+          </AssociationSet>
           <AssociationSet Name="FK_ResidentialAddress_Raions" Association="CRM18Model.FK_ResidentialAddress_Raions">
             <End Role="Raions" EntitySet="Raions" />
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
@@ -806,10 +840,6 @@
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_Subscribers_ResidentialAddress" Association="CRM18Model.FK_Subscribers_ResidentialAddress">
-            <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
-            <End Role="Subscribers" EntitySet="Subscribers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribers_ResidentialAddress1" Association="CRM18Model.FK_Subscribers_ResidentialAddress1">
             <End Role="ResidentialAddress" EntitySet="ResidentialAddress" />
             <End Role="Subscribers" EntitySet="Subscribers" />
           </AssociationSet>
@@ -872,7 +902,7 @@
             <PropertyRef Name="CRMID" />
           </Key>
           <Property Name="CRMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NumberCRM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberCRM" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SubscriberID" Type="Int32" Nullable="false" />
           <Property Name="ServicesID" Type="Int32" Nullable="false" />
@@ -880,7 +910,7 @@
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
           <Property Name="ServiceStatusID" Type="Int32" Nullable="false" />
           <Property Name="ProblemTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClosingDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ProblemTypes" Relationship="CRM18Model.FK_CRM_ProblemTypes" FromRole="CRM" ToRole="ProblemTypes" />
           <NavigationProperty Name="Services" Relationship="CRM18Model.FK_CRM_Services" FromRole="CRM" ToRole="Services" />
@@ -950,6 +980,16 @@
           <Property Name="Gender1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_Gender" FromRole="Gender" ToRole="Subscribers" />
         </EntityType>
+        <EntityType Name="KindsAndTypesService">
+          <Key>
+            <PropertyRef Name="KindsAndTypesServiceID" />
+          </Key>
+          <Property Name="KindsAndTypesServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOfServiceID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceTypes" Relationship="CRM18Model.FK_KindsAndTypesService_ServiceTypes" FromRole="KindsAndTypesService" ToRole="ServiceTypes" />
+          <NavigationProperty Name="TypeOfServices" Relationship="CRM18Model.FK_KindsAndTypesService_TypeOfServices" FromRole="KindsAndTypesService" ToRole="TypeOfServices" />
+        </EntityType>
         <EntityType Name="Modules">
           <Key>
             <PropertyRef Name="ModuleID" />
@@ -1001,7 +1041,6 @@
           <NavigationProperty Name="Raions" Relationship="CRM18Model.FK_ResidentialAddress_Raions" FromRole="ResidentialAddress" ToRole="Raions" />
           <NavigationProperty Name="Streets" Relationship="CRM18Model.FK_ResidentialAddress_Streets" FromRole="ResidentialAddress" ToRole="Streets" />
           <NavigationProperty Name="Subscribers" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="ResidentialAddress" ToRole="Subscribers" />
-          <NavigationProperty Name="Subscribers1" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress1" FromRole="ResidentialAddress" ToRole="Subscribers" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -1037,6 +1076,7 @@
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_ServiceTypes" FromRole="ServiceTypes" ToRole="CRM" />
+          <NavigationProperty Name="KindsAndTypesService" Relationship="CRM18Model.FK_KindsAndTypesService_ServiceTypes" FromRole="ServiceTypes" ToRole="KindsAndTypesService" />
         </EntityType>
         <EntityType Name="Streets">
           <Key>
@@ -1071,7 +1111,6 @@
           <NavigationProperty Name="EquipmentInstallations" Relationship="CRM18Model.FK_EquipmentInstallations_Subscribers" FromRole="Subscribers" ToRole="EquipmentInstallations" />
           <NavigationProperty Name="Gender" Relationship="CRM18Model.FK_Subscribers_Gender" FromRole="Subscribers" ToRole="Gender" />
           <NavigationProperty Name="ResidentialAddress" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress" FromRole="Subscribers" ToRole="ResidentialAddress" />
-          <NavigationProperty Name="ResidentialAddress1" Relationship="CRM18Model.FK_Subscribers_ResidentialAddress1" FromRole="Subscribers" ToRole="ResidentialAddress" />
         </EntityType>
         <EntityType Name="TypeContracts">
           <Key>
@@ -1096,6 +1135,7 @@
           <Property Name="TypeOfServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeOfService" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CRM" Relationship="CRM18Model.FK_CRM_TypeOfServices" FromRole="TypeOfServices" ToRole="CRM" />
+          <NavigationProperty Name="KindsAndTypesService" Relationship="CRM18Model.FK_KindsAndTypesService_TypeOfServices" FromRole="TypeOfServices" ToRole="KindsAndTypesService" />
         </EntityType>
         <Association Name="FK_AvailableModules_Modeles">
           <End Type="CRM18Model.Modules" Role="Modules" Multiplicity="1" />
@@ -1361,6 +1401,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KindsAndTypesService_ServiceTypes">
+          <End Type="CRM18Model.ServiceTypes" Role="ServiceTypes" Multiplicity="1" />
+          <End Type="CRM18Model.KindsAndTypesService" Role="KindsAndTypesService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTypes">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="KindsAndTypesService">
+              <PropertyRef Name="ServiceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KindsAndTypesService_TypeOfServices">
+          <End Type="CRM18Model.TypeOfServices" Role="TypeOfServices" Multiplicity="1" />
+          <End Type="CRM18Model.KindsAndTypesService" Role="KindsAndTypesService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfServices">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Principal>
+            <Dependent Role="KindsAndTypesService">
+              <PropertyRef Name="TypeOfServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ResidentialAddress_Raions">
           <End Type="CRM18Model.Raions" Role="Raions" Multiplicity="1" />
           <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="*" />
@@ -1386,18 +1450,6 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Subscribers_ResidentialAddress">
-          <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="1" />
-          <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ResidentialAddress">
-              <PropertyRef Name="ResidentialAddressID" />
-            </Principal>
-            <Dependent Role="Subscribers">
-              <PropertyRef Name="ResidentialAddressID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subscribers_ResidentialAddress1">
           <End Type="CRM18Model.ResidentialAddress" Role="ResidentialAddress" Multiplicity="1" />
           <End Type="CRM18Model.Subscribers" Role="Subscribers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1534,6 +1586,15 @@
               <MappingFragment StoreEntitySet="Gender">
                 <ScalarProperty Name="Gender1" ColumnName="Gender" />
                 <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KindsAndTypesService">
+            <EntityTypeMapping TypeName="CRM18Model.KindsAndTypesService">
+              <MappingFragment StoreEntitySet="KindsAndTypesService">
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="TypeOfServiceID" ColumnName="TypeOfServiceID" />
+                <ScalarProperty Name="KindsAndTypesServiceID" ColumnName="KindsAndTypesServiceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sessia2"
         mc:Ignorable="d" Icon="/resources/image.ico" Style="{StaticResource WindowsMain}"
-        Title="ООО «Телеком Нева Связь»" Height="600" Width="1000" MinHeight="600" MinWidth="1000">
+        Title="ООО «Телеком Нева Связь»" Height="700" Width="1000" MinHeight="700" MinWidth="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -15,10 +15,73 @@
         <TextBlock Name="tbHeader" Text="Создание заявки для абонента " HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Margin="10">
             <TextBlock x:Name="tbNomer" Text="Номер заявки: "/>
+            <Grid Margin="0, 5, 0, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Дата создания" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="dateOfCreation" Text="" MinWidth="200"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Text="Номер абонента" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="tbPhone" MinWidth="200"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
+                    <TextBlock Text="Лицевой счёт" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="tbPersonalAccount" MinWidth="200"/>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="0, 5, 0, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Услуга" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="cmbService" MinWidth="300" MaxWidth="300"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Text="Вид услуги" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="cmbTypeOfService" MinWidth="300" SelectionChanged="cmbTypeOfService_SelectionChanged" MaxWidth="300"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
+                    <TextBlock Text="Тип услуги" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="cmbServiceType" MinWidth="300" MaxWidth="300"/>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="0, 5, 0, 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Тип оборудования клиента" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="tbTypeEquipment" MinWidth="300"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Text="Статус" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="cmbStatus" MinWidth="300" MaxWidth="300"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
+                    <TextBlock Text="Тип проблемы" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="cmbProblemType" MinWidth="300" MaxWidth="300"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Дата закрытия: "/>
+                <DatePicker Name="dpClosingDate"/>
+            </StackPanel>
+            <TextBlock Text="Описание:"/>
+            <TextBox x:Name="tbDescription" Height="80" AcceptsReturn="True" TextWrapping="Wrap"/>
         </StackPanel>
         <Grid Grid.Row="2">
             <Button x:Name="btnBack" Content="Назад" Height="50" Width="200" Margin="20, 0, 0, 0" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Left" Click="btnBack_Click"/>
-            <Button x:Name="btnCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center"/>
+            <Button x:Name="btnCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center" Click="btnCRM_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -36,6 +36,7 @@ namespace Sessia2
         public virtual DbSet<Equipments> Equipments { get; set; }
         public virtual DbSet<Events> Events { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<KindsAndTypesService> KindsAndTypesService { get; set; }
         public virtual DbSet<Modules> Modules { get; set; }
         public virtual DbSet<ProblemTypes> ProblemTypes { get; set; }
         public virtual DbSet<Raions> Raions { get; set; }
