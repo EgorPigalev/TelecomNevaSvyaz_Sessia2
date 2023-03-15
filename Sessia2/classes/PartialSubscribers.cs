@@ -19,6 +19,18 @@ namespace Sessia2
 
             }
         }
+
+        public string FIOFull
+        {
+            get
+            {
+                return Surname + " " + Name + " " + Patronymic + " ";
+            }
+            set
+            {
+
+            }
+        }
         public string ListServices
         {
             get

@@ -98,7 +98,7 @@ namespace Sessia2
             }
             if (tbSearchPersonalAccount.Text.Replace(" ", "").Length > 0) // Поиск по лицевому счету
             {
-                subscribers = subscribers.Where(x => x.Contracts.PersonalAccount.ToString().ToLower().Contains(tbSearchPersonalAccount.Text.ToLower())).ToList();
+                subscribers = subscribers.Where(x => x.Contracts.PersonalAccount.ToString().ToLower().Contains(tbSearchPersonalAccount.Text.Replace(" ", "").ToLower())).ToList();
             }
             dgSubscribers.ItemsSource = subscribers;          
             if(subscribers.Count == 0 && b)
@@ -191,9 +191,12 @@ namespace Sessia2
             Filter();
         }
 
-        private void tbSearchPersonalAccount_TextInput(object sender, TextCompositionEventArgs e)
+        private void tbSearchPersonalAccount_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
+            if (!(Char.IsDigit(e.Text, 0)))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

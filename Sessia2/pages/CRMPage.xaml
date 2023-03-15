@@ -8,6 +8,29 @@
       d:DesignHeight="450" d:DesignWidth="900" Margin="10"
       Title="CRM">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Номер телефона" Margin="10"/>
+                <TextBox x:Name="tbPhone" PreviewTextInput="tbPhone_PreviewTextInput" TextChanged="tbPhone_TextChanged"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Фамилия абонента" Margin="10"/>
+                <TextBox x:Name="tbSurname" TextChanged="tbSurname_TextChanged"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Пользователь: "/>
+            <ComboBox Name="cmbSubscriber" MinWidth="400"/>
+        </StackPanel>
+        <Button x:Name="btnAddCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center" Grid.Row="2" Click="btnAddCRM_Click"/>
     </Grid>
 </Page>

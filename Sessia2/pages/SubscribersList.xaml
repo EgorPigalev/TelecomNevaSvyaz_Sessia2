@@ -39,7 +39,7 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="4" Margin="10">
                 <TextBlock Text="Лицевой счет" HorizontalAlignment="Center"/>
-                <TextBox x:Name="tbSearchPersonalAccount" SelectionChanged="tbSearchSurname_SelectionChanged" TextInput="tbSearchPersonalAccount_TextInput"/>
+                <TextBox x:Name="tbSearchPersonalAccount" SelectionChanged="tbSearchSurname_SelectionChanged" PreviewTextInput="tbSearchPersonalAccount_PreviewTextInput"/>
             </StackPanel>
         </Grid>
         <DataGrid Name="dgSubscribers" Grid.Row="1" Margin="10" FontSize="18" AutoGenerateColumns="False" CanUserAddRows="False" MouseDoubleClick="dgSubscribers_MouseDoubleClick">
