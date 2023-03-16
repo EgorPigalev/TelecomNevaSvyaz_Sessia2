@@ -82,6 +82,7 @@
         <Grid Grid.Row="2">
             <Button x:Name="btnBack" Content="Назад" Height="50" Width="200" Margin="20, 0, 0, 0" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Left" Click="btnBack_Click"/>
             <Button x:Name="btnCRM" Content="Сформировать заявку" Height="50" Width="300" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Center" Click="btnCRM_Click"/>
+            <Button x:Name="btnCheck" Content="Протестировать" Height="50" Width="250" Margin="0, 0, 20, 0" Template="{StaticResource ResourceKey=CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" HorizontalAlignment="Right" Click="btnCheck_Click"/>
         </Grid>
     </Grid>
 </Window>

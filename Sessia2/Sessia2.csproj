@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="windows\CheckEquipment.xaml.cs">
+      <DependentUpon>CheckEquipment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="KindsAndTypesService.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
@@ -163,6 +166,10 @@
     <Compile Include="TypeOfServices.cs">
       <DependentUpon>BaseDate.tt</DependentUpon>
     </Compile>
+    <Page Include="windows\CheckEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\AddCRM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

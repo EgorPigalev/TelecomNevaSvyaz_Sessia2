@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Sessia2
 {
@@ -20,6 +21,7 @@ namespace Sessia2
     public partial class AddCRM : Window
     {
         CRM crm;
+        public static int b; // Исправность оборудования (1 - исправно; 2 - не исправно)
         public AddCRM(int subscriberID)
         {
             InitializeComponent();
@@ -115,6 +117,23 @@ namespace Sessia2
             catch
             {
                 MessageBox.Show("При создание заявки клиента возникла ошибка!");
+            }
+        }
+
+        private void btnCheck_Click(object sender, RoutedEventArgs e)
+        {
+            b = 3;
+            CheckEquipment checkEquipment = new CheckEquipment();
+            checkEquipment.ShowDialog();
+            if(b == 1)
+            {
+                cmbStatus.SelectedIndex = 2;
+                dpClosingDate.Text = DateTime.Today.ToString("D");
+            }
+            else if(b == 2)
+            {
+                cmbStatus.SelectedIndex = 1;
+                dpClosingDate.Text = "";
             }
         }
     }
